@@ -11,7 +11,7 @@ __dirname = __dirname.slice(0, -7); // slice the /server folder prefix
 var app = express();
 app.use(compression({level: 1}));
 app.set('view engine', 'jade');
-app.set('port', 5000);
+app.set('port', process.env.PORT || 5000);
 app.use(express.static(__dirname + '/app'));
 
 app.get('/', function(req, res) {
