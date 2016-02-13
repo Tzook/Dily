@@ -3,9 +3,7 @@
 namespace.PlayerItem = function () {
     var vm = this;
     // elements
-    var _$player;
-    // properties
-    var _player;
+    var _$player, _$hand;
     
     // =============================
     //      public functions 
@@ -14,6 +12,9 @@ namespace.PlayerItem = function () {
         _$player = document.createElement('li');
         _$player.className = "player";
         _$player.innerHTML = getPlayerHtml(name);        
+        _$hand = new namespace.Hand();
+        _$hand.createHand(5, 0.5, true);
+        _$player.appendChild(_$hand.getElement());
     };
     
     vm.getElement = function () {
@@ -21,7 +22,9 @@ namespace.PlayerItem = function () {
     };
     
     function getPlayerHtml(name) {
-        return '<span class="name">' + name + '</span>';
+        return `
+        <span class="name">${name}</span>
+        `;
     }
 };
 })(window);

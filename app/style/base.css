@@ -55,3 +55,7 @@ button:hover {
 button:active {
     transform: scale(0.9);
 }
+
+.player {
+    margin-bottom: 50px;
+}

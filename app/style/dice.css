@@ -1,3 +1,8 @@
+hand {
+    position: relative;
+    display: block;
+}
+
 die {
     position: absolute;
     display: block;
@@ -8,7 +13,7 @@ die {
 /* results - decides which result to show */
 result,
 tilter {
-    transition: transform 2s linear;
+    transition: transform 1s ease-out;
 }
 result[value="6"] {
     /* nothing - rotate(0) */
@@ -74,6 +79,10 @@ face.two {
 face.five {
     /* back */    
     transform: rotateX( 90deg) translateZ(25px);
+}
+
+[hide-faces=true] dot {
+    display: none;
 }
 
 /* Dice dots on its faces */

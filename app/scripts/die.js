@@ -14,7 +14,7 @@ namespace.Die = function (locationService) {
     // =============================
     function calculateResult() {
         _face = getRandomNumber(1, _MAX_FACE);
-        _$result.setAttribute('value', _face);
+        setResult(_face);
     }
     
     function calculateRollTime(power) {
@@ -62,6 +62,14 @@ namespace.Die = function (locationService) {
         _$wrapper.style.top = _y + 'px';
     }
     
+    function setHideFaces(hideFaces) {
+        _$wrapper.setAttribute('hide-faces', hideFaces);        
+    }
+    
+    function setResult(result) {
+        _$result.setAttribute('value', result);        
+    }
+    
     // =============================
     //      private togglers       
     // =============================
@@ -101,14 +109,16 @@ namespace.Die = function (locationService) {
     // =============================
     //      public functions 
     // =============================
-    vm.createDie = function(maxFace, initialX, initialY) {
+    vm.createDie = function(maxFace, initialX, initialY, scale, hideFaces) {
         _MAX_FACE = maxFace;
         _$wrapper = document.createElement('die');
         _$wrapper.innerHTML = getDieHtml();
+        setHideFaces(hideFaces);
         _$scaler = _$wrapper.getElementsByTagName('scaler')[0];
         _$tilter = _$wrapper.getElementsByTagName('tilter')[0];
         _$flipper = _$wrapper.getElementsByTagName('flipper')[0];
         _$result = _$wrapper.getElementsByTagName('result')[0];
+        _$scaler.style.transform = 'scale(' + scale + ')';
         _x = initialX;
         _y = initialY;
         updatePositions();        
@@ -126,6 +136,16 @@ namespace.Die = function (locationService) {
             calculateResult();
         }, 5);
         return vm;
+    };
+    
+    // result for 0 to hide.
+    vm.toggleDie = function (result) {
+        if (result > 0) {
+            setResult(result);
+            setHideFaces(false);
+        } else {
+            setHideFaces(true);
+        }
     };
     
     vm.getElement = function() {

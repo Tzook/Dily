@@ -10,13 +10,12 @@ namespace.Hand = function () {
     // =============================
     //      public functions 
     // =============================
-    vm.createHand = function (amount) {
+    vm.createHand = function (amount, scale, hideFaces) {
         _$hand = document.createElement('hand');
-        var y = window.innerHeight - 130;
         for (var i = 0; i < amount; i++) {
             var die = new namespace.Die();
-            var x = i * 100 + 50;
-            die.createDie(6, x, y);
+            var x = (i * 100) * scale;
+            die.createDie(6, x, 0, scale, hideFaces);
             _dice.push(die);
             _$hand.appendChild(die.getElement());
         }
@@ -33,5 +32,30 @@ namespace.Hand = function () {
     vm.getElement = function () {
         return _$hand;
     };
-};
+    
+    vm.removeDie = function () {
+        if (_dice.length > 0) {
+            var die = _dice.pop();
+            die.getElement().remove();
+        }
+        return _dice.length;
+    };
+    
+    // diceNumbers is an object: 
+    // keys are the die number (0-4), and the value is the die result (1-6)
+    vm.toggleDice = function (diceNumbers) {
+        for (var dieNumber in diceNumbers) {
+            var dieResult = diceNumbers[dieNumber];
+            _dice[dieNumber].toggleDie(dieResult);
+        }
+    };
+    
+    vm.hideDice = function() {
+        var die = {};
+        for (var i in [0, 1, 2, 3, 4]) {
+            die[i] = 0;
+        }
+        vm.toggleDice(die);
+    };
+ };
 })(window);
