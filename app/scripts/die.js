@@ -82,21 +82,22 @@ namespace.Die = function (locationService) {
     //      private getters
     // =============================
     function getDieHtml() {
-        return `
-        <scaler>
-            <tilter>
-                <flipper>
-                    <result>
-                        <face class="six"><dot class="t-l"></dot><dot class="t-r"></dot><dot class="m-l"></dot><dot class="m-r"></dot><dot class="b-l"></dot><dot class="b-r"></dot></face>
-                        <face class="one"><dot class="m-m"></dot></face>
-                        <face class="three"><dot class="t-l"></dot><dot class="m-m"></dot><dot class="b-r"></dot></face>
-                        <face class="four"><dot class="t-l"></dot><dot class="t-r"></dot><dot class="b-l"></dot><dot class="b-r"></dot></face>
-                        <face class="two"><dot class="b-l"></dot><dot class="t-r"></dot></face>
-                        <face class="five"><dot class="t-l"></dot><dot class="t-r"></dot><dot class="m-m"></dot><dot class="b-l"></dot><dot class="b-r"></dot></face>
-                    </result>
-                </flipper>
-            </tilter>
-        </scaler>`;
+        return '' +
+        '<scaler>' +
+            '<tilter>' +
+                '<flipper>' +
+                    '<result>' +
+                        '<face class="six"><dot class="t-l"></dot><dot class="t-r"></dot><dot class="m-l"></dot><dot class="m-r"></dot><dot class="b-l"></dot><dot class="b-r"></dot></face>' +
+                        '<face class="one"><dot class="m-m"></dot></face>' +
+                        '<face class="three"><dot class="t-l"></dot><dot class="m-m"></dot><dot class="b-r"></dot></face>' +
+                        '<face class="four"><dot class="t-l"></dot><dot class="t-r"></dot><dot class="b-l"></dot><dot class="b-r"></dot></face>' +
+                        '<face class="two"><dot class="b-l"></dot><dot class="t-r"></dot></face>' +
+                        '<face class="five"><dot class="t-l"></dot><dot class="t-r"></dot><dot class="m-m"></dot><dot class="b-l"></dot><dot class="b-r"></dot></face>' +
+                    '</result>' +
+                '</flipper>' +
+            '</tilter>' +
+        '</scaler>'
+        + '';
     }   
     
     // =============================
@@ -109,11 +110,11 @@ namespace.Die = function (locationService) {
     // =============================
     //      public functions 
     // =============================
-    vm.createDie = function(maxFace, initialX, initialY, scale, hideFaces) {
+    vm.createDie = function(maxFace, initialX, initialY, scale) {
         _MAX_FACE = maxFace;
         _$wrapper = document.createElement('die');
         _$wrapper.innerHTML = getDieHtml();
-        setHideFaces(hideFaces);
+        setHideFaces(true);
         _$scaler = _$wrapper.getElementsByTagName('scaler')[0];
         _$tilter = _$wrapper.getElementsByTagName('tilter')[0];
         _$flipper = _$wrapper.getElementsByTagName('flipper')[0];
@@ -133,7 +134,7 @@ namespace.Die = function (locationService) {
             calculatePositions(nextX, nextY);
             calculateRollTime(power);
             calculateTilt();
-            calculateResult();
+            // calculateResult();
         }, 5);
         return vm;
     };

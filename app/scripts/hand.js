@@ -10,22 +10,23 @@ namespace.Hand = function () {
     // =============================
     //      public functions 
     // =============================
-    vm.createHand = function (amount, scale, hideFaces) {
+    vm.createHand = function (amount, scale) {
         _$hand = document.createElement('hand');
         for (var i = 0; i < amount; i++) {
             var die = new namespace.Die();
             var x = (i * 100) * scale;
-            die.createDie(6, x, 0, scale, hideFaces);
+            die.createDie(6, x, 0, scale);
             _dice.push(die);
             _$hand.appendChild(die.getElement());
         }
         return vm;
     };
     
-    vm.roll = function(power) {
+    vm.roll = function(result) {
         for (var i = 0; i < _dice.length; i++) {
             var die = _dice[i];
-            die.roll(power, 0, 0);
+            die.toggleDie(result[i]);
+            die.roll(5, 0, 0);
         }
     };
     

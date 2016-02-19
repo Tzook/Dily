@@ -39,13 +39,14 @@ namespace.RoomSelector = function (requestToJoinRoom) {
     //      private getters
     // =============================
     function getSelectHtml() {
-        return `
-        <h1>~Dilly~</h1>
-        <input class="name" type="text" placeholder="Name">
-        <input class="room" type="number" placeholder="Room" max="999999" min="0" size="5">
-        <button class="join">Join room</button>
-        <p>OR</p>
-        <button class="create">Create room</button>`;
+        return '' +
+        '<h1>~Dilly~</h1>' +
+        '<input class="name" type="text" placeholder="Name">' +
+        '<input class="room" type="number" placeholder="Room" max="999999" min="0" size="5">' +
+        '<button class="join">Join room</button>' +
+        '<p>OR</p>' +
+        '<button class="create">Create room</button>' +
+        '';
     }   
     
     function getRoomValue(str) {

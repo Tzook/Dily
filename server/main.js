@@ -30,7 +30,7 @@ io.use(function(socket, next) {
     var roomNumber = getRoomValue(room);
     if (roomNumber === -1) {
         next(new Error("Invalid room number provided: " + room));
-    } else if (socket.rooms[roomNumber] !== undefined && socket.rooms[roomNumber].playing) {
+    } else if (rooms.has(roomNumber) && rooms.get(roomNumber).playing) {
         next(new Error(`The room ${roomNumber} is already in playing!`));
     } else {
         socket.roomNumber = roomNumber;
@@ -53,7 +53,7 @@ io.use(function(socket, next) {
 io.use(function(socket, next) {
     if (socket.roomNumber === 0) {
         var random;
-        while (socket.rooms[random = getRandomNumber(1, 99999)] !== undefined) {
+        while (rooms.has(random = getRandomNumber(1, 99999))) {
             ; // continue until you find an empty room
         }
         socket.roomNumber = random;
@@ -66,7 +66,8 @@ io.use(function(socket, next) {
     if (!rooms.has(socket.roomNumber)) {
         rooms.set(socket.roomNumber, {
             playing: false,
-            users: new Map()
+            users: new Map(),
+            totalRolls: 0
         });
     }
     next();
@@ -76,21 +77,150 @@ io.use(function(socket, next) {
 io.use(function(socket, next) {
     var room = rooms.get(socket.roomNumber);
     room.users.set(socket.id, socket);
+    socket.dice = 5;
     socket.room = room;
     next();
 });
 
 io.on('connection', function(socket) {
+    var room = socket.room;
     console.log('connected!');
     socket.emit('room', { room: socket.roomNumber });
     
     emitUsers(socket);
     
     socket.on('disconnect', function() {
-        socket.room.users.delete(socket.id);
+        room.users.delete(socket.id);
         emitUsers(socket);
         console.log(`The socket ${socket.name} has disconnected.`);
     });
+    socket.on('start', function() {
+        io.emit('start');
+        console.log('starting!');
+        room.playing = true;
+    });
+    socket.on('roll', function() {
+        console.log('rolling');
+        socket.result = {};
+        var publicResult = {};
+        for (var i = 0; i < socket.dice; i++) {
+            socket.result[i] = getRandomNumber(1, 6);
+            publicResult[i] = 0;
+        }
+        socket.emit('roll', {
+            result: socket.result,
+            id: socket.id
+        });
+        socket.broadcast.emit('roll', {
+            result: publicResult,
+            id: socket.id
+        });
+        if (++room.totalRolls >= room.users.size) {
+            console.log('begin bets!');
+            setTimeout(function() {
+                io.emit('begin-bets');
+                room.turns = room.users.keys();
+                nextTurn(0, 0);
+            }, 2000);
+        }
+    });
+    
+    socket.on('bet', function(data) {
+        if (!room.bet) {
+            return;
+        }
+        var valid = true;
+        var die = data.die, count = data.count;
+        var currentDie = room.bet.die, currentCount = room.bet.count;
+        if (room.turn.value !== socket.id) {
+            valid = false;
+        }
+        // check for invalid data
+        if (valid && !count || !die || count < 1 || die < 1 || die > 6) {
+            valid = false;
+        }
+        // check for invalid values
+        if (valid) {
+            if (count < currentCount) {
+                valid = false;
+            } else if (count == currentCount) {
+                valid = die > currentDie;
+            }
+        }
+        if (!valid) {
+            socket.emit('turn', {
+                id: room.turn.value,
+                bet: room.bet
+            });
+        } else {
+            nextTurn(count, die);
+        }
+    });
+    
+    function nextTurn(count, die) {
+        room.bet = { count, die };
+        room.lastTurn = room.turn;
+        room.turn = room.turns.next();
+        if (room.turn.done) {
+            room.turns = room.users.keys();
+            room.turn = room.turns.next();
+        }
+        io.emit('turn', {
+            id: room.turn.value, 
+            bet: room.bet
+        });
+    }
+    
+    socket.on('lying', function() {
+        if (!room.lastTurn || room.turn.value !== socket.id) {
+            return;
+        }
+        var die = room.bet.die, count = room.bet.count;
+        var results = getResults();
+        if (results[die] >= count) {
+            // socket loses a die
+            loseDie(socket);
+        } else {
+            var user = room.users.get(room.lastTurn.value);
+            loseDie(user);
+        }
+    });
+    
+    function getResults() {
+        var results = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0};
+        room.users.forEach(function(user) {
+            for (var i in user.result) {
+                var num = user.result[i];
+                results[num]++;
+            }
+        });
+        return results;
+    }
+    
+    function loseDie(loserSocket) {
+        emitResults();
+        socket.on('next', next); 
+        function next() {
+            loserSocket.dice--;
+            io.emit('lose-die', {
+                id: loserSocket.id
+            });
+            io.emit('start');
+            socket.room.totalRolls = 0;
+            socket.removeListener('next', next); 
+        } 
+    }
+    function emitResults() {
+        room.users.forEach(function(user) {
+            user.broadcast.emit('roll', {
+                result: user.result,
+                id: user.id
+            });
+        });
+        io.emit('results', {
+            id: socket.id
+        });
+    }
 });
 
 

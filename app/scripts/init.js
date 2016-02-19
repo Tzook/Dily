@@ -17,7 +17,7 @@
     function requestToJoinRoom(name, room) {
         roomSelector.hideSelectRoom();
         var socket = window.io(window.location.host, {query: "room=" + room + "&name=" + name});
-        var game = new Game();
+        var game = new namespace.Game();
         game.init(socket);
     };
 })(window);

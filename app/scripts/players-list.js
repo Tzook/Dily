@@ -5,7 +5,7 @@ namespace.PlayersList = function () {
     // elements
     var _$list;
     // properties
-    var _players;
+    var _players, _turn;
     
     // =============================
     //      public functions 
@@ -18,11 +18,11 @@ namespace.PlayersList = function () {
     };
     
     vm.setList = function (players, myId) {
-        players[myId] = 'Me';
+        players[myId] += ' (me)';
         // remove gone players
         for (var id in _players) {
             if (players[id] === undefined) {
-                _players[id].element.remove();
+                _players[id].remove();
                 delete _players[id];
             }
         }
@@ -32,13 +32,26 @@ namespace.PlayersList = function () {
                 var playerItem = new namespace.PlayerItem();
                 playerItem.createElement(players[id]);
                 var element = playerItem.getElement();
-                _players[id] = {
-                    object: playerItem,
-                    element: element
-                };
+                _players[id] = playerItem;
                 _$list.appendChild(element);
             }
         }
+    };
+    
+    vm.roll = function(id, result) {
+        _players[id].roll(result);
+    };
+    
+    vm.setTurn = function(id) {
+        if (_turn && id != _turn) {
+            _players[_turn].setTurn(false);
+        }
+        _players[id].setTurn(true);
+        _turn = id;
+    };
+    
+    vm.removeDie = function(id) {
+        _players[id].removeDie();
     };
 };
 })(window);

@@ -14,6 +14,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 main {
     margin-top: 50px;
     text-align: center;
@@ -56,6 +60,49 @@ button:active {
     transform: scale(0.9);
 }
 
+button[disabled] {
+    cursor: not-allowed;
+    opacity: .5;
+}
+
 .player {
-    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+
+.name[turn=true]:after {
+    content: "<- TURN";
+    color: RED;
+    margin-left: 5px;
+}
+
+.actions {
+    padding-top: 20px;
+}
+
+.bet {
+    position: relative;
+    text-align: center;
+}
+
+.bet h1 {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    font-size: 72px;
+    font-weight: 400;
+}
+
+.bet h2 {
+    margin: 0 5px;
+}
+
+.bet die {
+    position: relative;
+    display: inline-block;
+}
+.bet-values {
+    text-align: center;
+}
+.bet-values input {
+    display: inline-block;
+    margin: 0 10px;
 }
