@@ -92,6 +92,10 @@ io.on('connection', function(socket) {
     socket.on('disconnect', function() {
         room.users.delete(socket.id);
         emitUsers(socket);
+        if (room.users.size === 0) {
+            console.log('removing room');
+            rooms.delete(room);
+        }
         console.log(`The socket ${socket.name} has disconnected.`);
     });
     socket.on('start', function() {
