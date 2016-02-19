@@ -7,7 +7,6 @@ namespace.Game = function () {
     
     vm.init = function(socket) {
         _socket = socket;
-        
         _players = new namespace.PlayersList();
         _actions = new namespace.GameActions();
         _bet = new namespace.Bet();
@@ -49,7 +48,6 @@ namespace.Game = function () {
         }
         
         function waitForRolls() {
-            
             _socket.on('begin-bets', function() {
                 _socket.removeListener('begin-bets');
                 _actions.beginBets();

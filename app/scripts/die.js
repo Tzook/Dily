@@ -134,7 +134,6 @@ namespace.Die = function (locationService) {
             calculatePositions(nextX, nextY);
             calculateRollTime(power);
             calculateTilt();
-            // calculateResult();
         }, 5);
         return vm;
     };
