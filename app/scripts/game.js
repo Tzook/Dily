@@ -39,6 +39,7 @@ namespace.Game = function () {
             _players.roll(data.id, data.result);
         });
         
+        // starts a new round in the game
         function start() {
             _socket.on('start', function(data) {
                 _socket.removeListener('start');
@@ -64,10 +65,12 @@ namespace.Game = function () {
                 }
             });
             
+            // finished the round
             _socket.on('results', function(data) {
                 _socket.removeListener('turn');
                 _socket.removeListener('results');
                 start();
+                // show the 'continue' only to the one that just played - as if it is his 'next player' button
                 _actions.playAgain("/#" + _socket.id == data.id);
                 waitForDieToBeLost();
             });

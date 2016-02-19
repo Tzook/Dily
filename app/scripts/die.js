@@ -12,17 +12,14 @@ namespace.Die = function (locationService) {
     // =============================  
     //      private calculators
     // =============================
-    function calculateResult() {
-        _face = getRandomNumber(1, _MAX_FACE);
-        setResult(_face);
-    }
-    
+    // A random number for each die to roll - so it will look more natural
     function calculateRollTime(power) {
         var time = power + 2 - Math.random() * 4;
         _$flipper.style['animation-duration'] = time + 's';
         _$wrapper.style['animation-duration'] = time + 's';
     }
     
+    // calculate the 'rotation' of the die, so they won't all look like they stand the same
     function calculateTilt() {
         var tiltZ = getRandomNumber(0, 360);
         var tiltX = getRandomNumber(20, 35);
@@ -33,12 +30,10 @@ namespace.Die = function (locationService) {
         _x += _transx;
         _y += _transy;
     }
-    
     function calculateNextDiePosition(nextX, nextY) {
         _transx = nextX;
         _transy = nextY;
     }
-    
     function calculatePositions(nextX, nextY) {
         calculateCurrentDiePosition();
         calculateNextDiePosition(nextX, nextY);
@@ -139,7 +134,7 @@ namespace.Die = function (locationService) {
     };
     
     // result for 0 to hide.
-    vm.toggleDie = function (result) {
+    vm.setResult = function (result) {
         if (result > 0) {
             setResult(result);
             setHideFaces(false);

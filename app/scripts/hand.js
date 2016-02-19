@@ -25,7 +25,7 @@ namespace.Hand = function () {
     vm.roll = function(result) {
         for (var i = 0; i < _dice.length; i++) {
             var die = _dice[i];
-            die.toggleDie(result[i]);
+            die.setResult(result[i]);
             die.roll(5, 0, 0);
         }
     };
@@ -42,12 +42,10 @@ namespace.Hand = function () {
         return _dice.length;
     };
     
-    // diceNumbers is an object: 
-    // keys are the die number (0-4), and the value is the die result (1-6)
-    vm.toggleDice = function (diceNumbers) {
-        for (var dieNumber in diceNumbers) {
-            var dieResult = diceNumbers[dieNumber];
-            _dice[dieNumber].toggleDie(dieResult);
+    vm.setResults = function (diceNumbers) {
+        for (var i in diceNumbers) {
+            var dieResult = diceNumbers[i];
+            _dice[i].setResult(dieResult);
         }
     };
     

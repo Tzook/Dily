@@ -27,7 +27,7 @@ namespace.Bet = function () {
     };
     
     vm.setBet = function(bet) {
-        _die.toggleDie(bet.die);
+        _die.setResult(bet.die);
         _$count.innerText = bet.count; 
     };
 
