@@ -76,6 +76,7 @@ namespace.Game = function () {
         }
         function waitForDieToBeLost() {
             _socket.on('lose-die', function(data) {
+                _socket.removeListener('lose-die');
                 _players.removeDie(data.id);
             });
         };
