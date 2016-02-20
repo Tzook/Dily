@@ -58,7 +58,6 @@ namespace.GameActions = function () {
     
     function addEvents() {
         _$start.addEventListener('click', function() {
-            _$start.removeEventListener('click');
             _socket.emit('start');
         });
         _$leave.addEventListener('click', function() {
@@ -69,8 +68,8 @@ namespace.GameActions = function () {
             _socket.emit('roll');
         });
         _$bet.addEventListener('click', function() {
-            var die = _$die.value;
-            var count = _$count.value;
+            var die = +_$die.value;
+            var count = +_$count.value;
             if (die < 1 || die > 6) {
                 alert("The die has to be between 1 to 6");
             } else if (count <= 0) {
