@@ -6,8 +6,8 @@ const COMMONJS_REQUIRE_NAME     = 'commonjs';
 const ALL_JS_NAME               = 'js';
 const ES6_IMPORT_REGEXP         = /([^\S]|^)import\s(.+?);/g;
 const SCSS_IMPORT_REGEXP        = /([^\S]|^)@import\s(.+?);/g;
-const COMMONJS_REQUIRE_REGEXP   = /([^\S]|^)require\s*\((.+?)\)/g;
-const ALL_JS_REGEXP             = /([^\S]|^)(import\s|require\s*\()(.+?)[\);]/g;
+const COMMONJS_REQUIRE_REGEXP   = /([^\S]|^|=|\(|,)require\s*\((.+?)\)/g;
+const ALL_JS_REGEXP             = /(([^\S]|^)import\s|([^\S]|^|=|\(|,)require\s*\()(.+?)[\);]/g;
 const QUOTE_REGEXP              = /["'](.+?)["']/g;
 const COMMENTS_REGEXP           = /\/\*.+?\*\/|\/\/.*(?=[\n\r])/g;
 
