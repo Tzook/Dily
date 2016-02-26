@@ -19,14 +19,15 @@ class Router {
      */
     init () {
         let importGraph = new ImportGraph();
-        let graph = importGraph.createGraph(__dirname.slice(0,-5), {
-                loadPaths: [process.cwd() + '/server'], // /base is slice -5
+        let graph = importGraph.createGraph(__dirname.slice(0,-5), { // /base is slice -5
+                loadPaths: [process.cwd() + '/server'],
                 extensions: ['js'],
                 extensionPrefix: ['.router'],
                 parseSyntax: 'js'
             });
             graph.visitAncestors(__dirname + '/router.js', (node) => {
                 let RouterDescendant = require(node),
+                    // init inhertanced routers here
                     routerDescendant = new RouterDescendant(this.app, this.io, this.socket);
                 routerDescendant.init();
             });

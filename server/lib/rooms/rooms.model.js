@@ -1,34 +1,80 @@
 'use strict';
 
 /**
- * 
+ * Room object
  */
-class RoomsModel {
+class Room {
+    /**
+     * 
+     */
     constructor () {
-        this.players = new Set(); // object are the keys
+        this.playerList = new Map(); // key is socket.id, maybe should use something more lasting
+        this.playing = false;
+        this.totalRolls = 0;
     }
     
+    /**
+     * needed?
+     */
     get players () {
-        return this.players.enteries;
+        return this.playerList;
     }
     
+    /**
+     * 
+     */
+    get isPlaying () {
+        return this.playing;
+    }
+    
+    /**
+     * 
+     */
+    set isPlaying (state) {
+        this.playing = state;
+    }
+    
+    /**
+     * 
+     */
     get size () {
-        return this.players.size;
+        return this.playerList.size;
     }
     
-    add (playerKey) {
-        this.players.add(playerKey);
+    /**
+     * 
+     */
+    addPlayer (playerKey, player) {
+        this.playerList.set(playerKey, player);
     }
     
-    remove (playerKey) {
-        this.players.delete(playerKey);
+    /**
+     * 
+     */
+    getPlayer (playerKey) {
+        return this.playerList.get(playerKey);
     }
     
-    removeAll () {
-        this.players.clear();
+    /**
+     * 
+     */
+    removePlayer (playerKey) {
+        this.playerList.delete(playerKey);
     }
     
-    has (playerKey) {
-        this.players.has(playerKey);
+    /**
+     * 
+     */
+    removeAllPlayers () {
+        this.playerList.clear();
+    }
+    
+    /**
+     * 
+     */
+    hasPlayer (playerKey) {
+        this.playerList.has(playerKey);
     }
 }
+
+module.exports = Room;
