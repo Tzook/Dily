@@ -1,5 +1,6 @@
 'use strict';
 let gulp 		= require('gulp'),
+    spawn       = require('child_process').spawn,
 	//babelify	= require('babelify'),
 	//sass 		= require('gulp-sass'),
 	//mocha 		= require('gulp-mocha'),
@@ -51,6 +52,7 @@ let gulp 		= require('gulp'),
 
 // Server start
 gulp.task("server:start", () => {
+    spawn('npm',['start'], {stdio: 'inherit'}); // set the typescript compilation process going
 	server.listen({path: './server/bootstrap/bootstrap.js'});
 });
 // Server kill

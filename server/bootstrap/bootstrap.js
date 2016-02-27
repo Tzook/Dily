@@ -31,9 +31,9 @@ class Bootstrap {
         this.app.use(compression({level: 1}));
         this.app.set('view engine', 'jade');
         this.app.set('port', process.env.PORT || 5000);
-        this.app.use(express.static(__dirname + '/app'));
+        this.app.use(express.static(__dirname));
         this.app.get('/', (req, res) => {
-            res.sendFile('app/'+ this.config.enviorment.index +'.html', { root: __dirname });
+            res.sendFile(this.config.enviorment.index +'.html', { root: __dirname });
         });
         
         let server = http.createServer(this.app).listen(this.app.get('port'));
