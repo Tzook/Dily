@@ -6,8 +6,7 @@
     "start": "npm run tsc:w",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "typings": "typings",
-    "postinstall": "typings install"
+    "typings": "typings"
   },
   "dependencies": {
     "angular2": "~2.0.0-beta.7",
