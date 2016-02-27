@@ -32,7 +32,7 @@ class Bootstrap {
         this.app.set('view engine', 'jade');
         this.app.set('port', process.env.PORT || 5000);
         this.app.use(express.static(__dirname));
-        this.app.get('/', (req, res) => {
+        this.app.use(/\/(?!(data)).*/, (req, res) => {
             res.sendFile(this.config.enviorment.index +'.html', { root: __dirname });
         });
         

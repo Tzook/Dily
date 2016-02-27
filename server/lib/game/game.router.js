@@ -27,7 +27,10 @@ class GameRouter extends Router {
         console.log(`Connected the socket ${socket.name}!`);
         // tell the user the room number so he can ensure his url is correct
         socket.emit('room', { room: socket.roomKey });
-        emitPlayers(io, socket);
+        setTimeout(() => {
+            // need to think about how to implement this
+            emitPlayers(io, socket);
+        }, 100);
         
         socket.on('disconnect', () => {
             room.removePlayer(socket.id);
@@ -193,9 +196,12 @@ class GameRouter extends Router {
         }
 
         function getPlayers(players) {
-            var result = {};
+            var result = [];
             players.forEach((user, userId) => {
-                result[userId] = user.name;
+                result.push({
+                    id: userId,
+                    name: user.name
+                });
             });
             console.log(`Sending the list of players:  ${JSON.stringify(result)}.`);        
             return result;

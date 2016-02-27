@@ -65,11 +65,16 @@ button[disabled] {
     opacity: .5;
 }
 
-.player {
-    padding-bottom: 50px;
+.players {
+    text-align: left;
 }
 
-.name[turn=true]:after {
+player {
+    padding-bottom: 50px;
+    display: block;
+}
+
+.turn:after {
     content: "<- TURN";
     color: RED;
     margin-left: 5px;
