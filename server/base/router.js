@@ -1,6 +1,7 @@
 'use strict';
 
-let ImportGraph = require('../bootstrap/import-graph/index');
+let ImportGraph = require('../bootstrap/import-graph/index'),
+    path        = require('path');
 
 /**
  *  Router Base
@@ -19,8 +20,9 @@ class Router {
      */
     init () {
         let importGraph = new ImportGraph();
-        let graph = importGraph.createGraph(__dirname.slice(0,-5), { // /base is slice -5
-                loadPaths: [process.cwd() + '/server'],
+        let loadPaths = path.dirname(__dirname);
+        let graph = importGraph.createGraph(loadPaths, { // slice /base
+                loadPaths: [loadPaths],
                 extensions: ['js'],
                 extensionPrefix: ['.router'],
                 parseSyntax: 'js'

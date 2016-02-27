@@ -40,7 +40,7 @@ namespace.RoomSelector = function (requestToJoinRoom) {
     // =============================
     function getSelectHtml() {
         return '' +
-        '<h1>~Dilly~</h1>' +
+        '<h1>~Dily~</h1>' +
         '<input class="name" type="text" placeholder="Name">' +
         '<input class="room" type="number" placeholder="Room" max="999999" min="0" size="5">' +
         '<button class="join">Join room</button>' +
@@ -51,7 +51,7 @@ namespace.RoomSelector = function (requestToJoinRoom) {
     
     function getRoomValue(str) {
         var num = +str;
-        if (Number.isInteger(num) && num > 0 && num < 100000) {
+        if (Number.isInteger(num) && num >= 0 && num < 100000) {
             return num;
         }
         return -1;

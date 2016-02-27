@@ -3,12 +3,13 @@
 let express 		= require('express'),
     http			= require('http'),
     socketio		= require('socket.io'),
-	compression		= require('compression');
+	compression		= require('compression'),
+    path            = require('path');
     
 let Config          = require('../config/config'),
     Router          = require('../base/router');
-    
-__dirname = __dirname.slice(0, -17); // slice the /server/bootstrap folder prefix
+  
+__dirname = path.dirname(path.dirname(__dirname)); // slice the /server/bootstrap folder prefix
     
 /**
  *  Bootstrap manager to initiate the app
