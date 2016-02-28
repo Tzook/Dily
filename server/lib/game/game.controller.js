@@ -23,7 +23,7 @@ class GameController {
         this.emitPlayers(); // update the new user list to everyone
         if (room.size === 0) {
             console.info(`Removing room ${this.socket.roomKey}`);
-            rooms.removeRoom(room);
+            rooms.removeRoom(this.socket.roomKey);
         }
         console.info(`The socket ${this.socket.name} has disconnected from room ${this.socket.roomKey}.`);
     }
@@ -53,7 +53,7 @@ class GameController {
             id: this.socket.id
         });
         console.info(`Roll for ${this.socket.name} is: ${JSON.stringify(this.socket.result)}`);
-        this.socket.to(this.socket.roomKey).broadcast.emit('roll', {
+        this.socket.to(this.socket.roomKey).emit('roll', {
             result: publicResult,
             id: this.socket.id
         });
@@ -101,7 +101,7 @@ class GameController {
             console.info(`Recieved 'bet' values that are not well by ${this.socket.name}.`);
             console.info(`current count/die: ${currentCount}/${currentDie}.`);
             console.info(`recieved count/die: ${count}/${die}.`);
-            this.socket.to(this.socket.roomKey).emit('turn', {
+            this.socket.emit('turn', {
                 id: room.turn.value,
                 bet: room.bet
             });
@@ -205,8 +205,8 @@ class GameController {
         this.io.to(this.socket.roomKey).emit('results', {
             id: this.socket.id
         });
-        this.socket.on('next', (next).bind(this)); 
-        function next() {
+        // actual lose dice action
+        let next = (function () {
             loserSocket.dice--;
             console.info(`Player ${loserSocket.name} lost a die. Now he has ${loserSocket.dice}.`);        
             this.io.to(this.socket.roomKey).emit('lose-die', {
@@ -215,7 +215,9 @@ class GameController {
             this.io.to(this.socket.roomKey).emit('start');
             this.socket.room.totalRolls = 0;
             this.socket.removeListener('next', next); 
-        } 
+        }).bind(this);
+        
+        this.socket.on('next', next);
     }
 }
 
