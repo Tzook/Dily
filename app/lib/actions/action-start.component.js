@@ -1,4 +1,4 @@
-System.register(['angular2/core', './player.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,40 +10,40 @@ System.register(['angular2/core', './player.component'], function(exports_1, con
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, player_component_1;
-    var PlayersComponent;
+    var core_1, router_1;
+    var ActionStartComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (player_component_1_1) {
-                player_component_1 = player_component_1_1;
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
-            PlayersComponent = (function () {
-                function PlayersComponent() {
+            ActionStartComponent = (function () {
+                function ActionStartComponent() {
+                    this.start = new core_1.EventEmitter();
                 }
-                PlayersComponent.prototype.getPlayers = function () {
-                    var _this = this;
-                    return Object.keys(this.list).map(function (item) { return _this.list[item]; });
+                ActionStartComponent.prototype.emitStart = function () {
+                    this.start.emit({});
                 };
                 __decorate([
-                    core_1.Input(), 
+                    core_1.Output(), 
                     __metadata('design:type', Object)
-                ], PlayersComponent.prototype, "list", void 0);
-                PlayersComponent = __decorate([
+                ], ActionStartComponent.prototype, "start", void 0);
+                ActionStartComponent = __decorate([
                     core_1.Component({
-                        selector: 'players',
-                        template: "\n        <ul class=\"players\">\n            <player *ngFor=\"#player of getPlayers()\" [name]=\"player.name\"></player>\n        </ul>\n    ",
-                        directives: [player_component_1.PlayerComponent],
+                        selector: 'action-start',
+                        template: "\n        <button (click)=\"emitStart()\">start</button>\n        <button [routerLink]=\"['Lobby']\">exit</button>\n    ",
+                        directives: [router_1.RouterLink],
                     }), 
                     __metadata('design:paramtypes', [])
-                ], PlayersComponent);
-                return PlayersComponent;
+                ], ActionStartComponent);
+                return ActionStartComponent;
             }());
-            exports_1("PlayersComponent", PlayersComponent);
+            exports_1("ActionStartComponent", ActionStartComponent);
         }
     }
 });
-//# sourceMappingURL=players.component.js.map
+//# sourceMappingURL=action-start.component.js.map

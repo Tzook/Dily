@@ -196,12 +196,9 @@ class GameRouter extends Router {
         }
 
         function getPlayers(players) {
-            var result = [];
+            var result = {};
             players.forEach((user, userId) => {
-                result.push({
-                    id: userId,
-                    name: user.name
-                });
+                result[userId] = {name: user.name};
             });
             console.log(`Sending the list of players:  ${JSON.stringify(result)}.`);        
             return result;

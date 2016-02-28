@@ -18,6 +18,10 @@ export class SocketService {
         return this._socket;
     }
     
+    get myId() {
+        return "/#" + this._socket.id;
+    }
+    
     connect(name:string, room:string) {
         this._logger.log(`Trying to connect to socket with name ${name} and room ${room}.`);
         // TODO somehow solve the io issue - it is not known to typescript

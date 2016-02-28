@@ -41,6 +41,13 @@ System.register(['angular2/core', '../logger/logger'], function(exports_1, conte
                     enumerable: true,
                     configurable: true
                 });
+                Object.defineProperty(SocketService.prototype, "myId", {
+                    get: function () {
+                        return "/#" + this._socket.id;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
                 SocketService.prototype.connect = function (name, room) {
                     var _this = this;
                     this._logger.log("Trying to connect to socket with name " + name + " and room " + room + ".");

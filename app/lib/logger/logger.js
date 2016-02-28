@@ -26,7 +26,14 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     for (var _i = 0; _i < arguments.length; _i++) {
                         args[_i - 0] = arguments[_i];
                     }
-                    console.log.apply(console, args);
+                    console.info.apply(console, args);
+                };
+                Logger.prototype.warn = function () {
+                    var args = [];
+                    for (var _i = 0; _i < arguments.length; _i++) {
+                        args[_i - 0] = arguments[_i];
+                    }
+                    console.warn.apply(console, args);
                 };
                 Logger = __decorate([
                     core_1.Injectable(), 
