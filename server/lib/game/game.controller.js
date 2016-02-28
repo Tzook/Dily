@@ -4,7 +4,7 @@ let rooms       = require('../rooms/rooms.service'),
     MathHelper  = require('../math/utils');
 
 /**
- * TODO: NOAM: this ain't went to well...
+ * 
  */
 class GameController {
     constructor(io, socket) {
