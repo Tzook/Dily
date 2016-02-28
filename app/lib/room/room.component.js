@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../socket/socket.service', '../players/players.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../socket/socket.service', '../players/players.component', '../players/players.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, socket_service_1, players_component_1;
+    var core_1, router_1, socket_service_1, players_component_1, players_service_1;
     var RoomComponent;
     return {
         setters:[
@@ -25,31 +25,41 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
             },
             function (players_component_1_1) {
                 players_component_1 = players_component_1_1;
+            },
+            function (players_service_1_1) {
+                players_service_1 = players_service_1_1;
             }],
         execute: function() {
             RoomComponent = (function () {
-                function RoomComponent(_router, _routeParams, _socketService) {
+                function RoomComponent(_router, _routeParams, _socketService, _playersService) {
                     this._router = _router;
                     this._routeParams = _routeParams;
                     this._socketService = _socketService;
+                    this._playersService = _playersService;
                     if (!this._socketService.isConnected) {
                         // TODO is there a way to navigate and replace the history?
                         _router.navigate(['EnterName', { room: this._routeParams.get('room') }]);
                     }
                     else {
+                        this._players = [];
                         this._enabled = true;
                     }
                 }
+                RoomComponent.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this._playersService.onPlayers(function (players) { return _this._players = players; });
+                };
                 RoomComponent.prototype.ngOnDestroy = function () {
                     this._socketService.disconnect();
                 };
                 RoomComponent = __decorate([
                     core_1.Component({
                         selector: 'room',
-                        template: "\n        <div *ngIf=\"_enabled\">\n            <players></players>\n            In room.\n        </div>\n    ",
-                        directives: [players_component_1.PlayersComponent]
+                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n            In room.\n        </div>\n    ",
+                        directives: [players_component_1.PlayersComponent],
+                        providers: [players_service_1.PlayersService],
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, socket_service_1.SocketService])
+                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, socket_service_1.SocketService, players_service_1.PlayersService])
                 ], RoomComponent);
                 return RoomComponent;
             }());
