@@ -8,9 +8,10 @@ let rooms       = require('../rooms/rooms.service'),
  */
 class GameController {
     constructor(io, socket) {
-        this.io         = io;
-        this.socket     = socket;
-        this.mathHelper = new MathHelper();
+        this.io                 = io;
+        this.socket             = socket;
+        this.mathHelper         = new MathHelper();
+        this.onesWorthDouble    = true; // does ones worth double?
     }
     
     /**
@@ -91,9 +92,17 @@ class GameController {
         }
         // check for invalid values
         if (valid) {
-            if (count < currentCount) {
+            let countToCheck = currentCount;
+            if (this.onesWorthDouble) {
+                if (currentDie === 1 && die !== 1) {
+                    countToCheck *= 2;
+                } else if (die === 1 && currentDie !== 1) {
+                    countToCheck = Math.ceil(countToCheck/2);
+                }
+            }
+            if (count < countToCheck) {
                 valid = false;
-            } else if (count == currentCount) {
+            } else if (count == countToCheck) {
                 valid = die > currentDie;
             }
         }
@@ -121,13 +130,14 @@ class GameController {
         }
         let die = room.bet.die, count = room.bet.count;
         let results = this.getResults();
-        console.info(`Game results: ${JSON.stringify(results)}.`);        
-        if (results[die] >= count) {
+        console.info(`Game results: ${JSON.stringify(results)}.`);
+        let ones = (die !== 1) ?  results[1] : 0;     
+        if ((results[die] + ones) >= count) {
             // socket loses a die
-            console.info(`The guy was not lying! there are ${results[die]} times die ${die}.`);        
+            console.info(`The guy was not lying! there are ${results[die]} times die ${die}` + ((ones) ? ` and ${ones} ones.` : `.`));        
             this.loseDie(this.socket);
         } else {
-            console.info(`The guy was indeed lying! there are ${results[die]} times die ${die}.`);        
+            console.info(`The guy was indeed lying! there are ${results[die]} times die ${die}` + ((ones) ? ` and ${ones} ones.` : `.`));        
             let player = room.getPlayer(room.lastTurn.value);
             this.loseDie(player);
         }
