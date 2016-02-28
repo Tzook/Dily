@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {RoomValidator} from '../validators/room.validator';
+import {RoomValidator} from './room.validator';
 
 @Component({
     selector: 'lobby',

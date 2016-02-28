@@ -4,8 +4,10 @@ import {HandComponent} from '../dice/hand.component';
 @Component({
     selector: 'player',
     template: `
-        <span [ngClass]="{'turn': _turn}">{{name}}</span>
-        <hand [count]="_count"></hand>
+        <li>
+            <span [ngClass]="{'turn': _turn}">{{name}}</span>
+            <hand [count]="_count"></hand>
+        </li>
     `,
     directives: [HandComponent],
     providers: [],

@@ -36,7 +36,7 @@ System.register(['angular2/core', '../dice/hand.component'], function(exports_1,
                 PlayerComponent = __decorate([
                     core_1.Component({
                         selector: 'player',
-                        template: "\n        <span [ngClass]=\"{'turn': _turn}\">{{name}}</span>\n        <hand [count]=\"_count\"></hand>\n    ",
+                        template: "\n        <li>\n            <span [ngClass]=\"{'turn': _turn}\">{{name}}</span>\n            <hand [count]=\"_count\"></hand>\n        </li>\n    ",
                         directives: [hand_component_1.HandComponent],
                         providers: [],
                     }), 

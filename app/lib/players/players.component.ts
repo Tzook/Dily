@@ -8,7 +8,6 @@ import {Player} from './player.interface';
         <ul class="players">
             <player *ngFor="#player of list" [name]="player.name"></player>
         </ul>
-        Players list.
     `,
     directives: [PlayerComponent],
 })

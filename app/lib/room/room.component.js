@@ -55,7 +55,7 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                 RoomComponent = __decorate([
                     core_1.Component({
                         selector: 'room',
-                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n            In room.\n        </div>\n    ",
+                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n        </div>\n    ",
                         directives: [players_component_1.PlayersComponent],
                         providers: [players_service_1.PlayersService],
                     }), 

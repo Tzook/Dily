@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {LobbyComponent} from './lobby/lobby.component';
-import {EnterNameComponent} from './room/enter-name.component';
+import {EnterNameComponent} from './enter-name/enter-name.component';
 import {RoomComponent} from './room/room.component';
 
 @Component({

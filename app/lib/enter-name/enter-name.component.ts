@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteParams, Router, ROUTER_DIRECTIVES} from 'angular2/router';
-import {NameValidator} from '../validators/name.validator';
+import {NameValidator} from './name.validator';
 import {SocketService} from '../socket/socket.service';
 
 @Component({

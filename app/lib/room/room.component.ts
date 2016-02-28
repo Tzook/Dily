@@ -10,7 +10,6 @@ import {Player} from '../players/player.interface';
     template: `
         <div *ngIf="_enabled">
             <players [list]="_players"></players>
-            In room.
         </div>
     `,
     directives: [PlayersComponent],
