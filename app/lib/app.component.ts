@@ -1,8 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {LobbyComponent} from './lobby/lobby.component';
-import {EnterNameComponent} from './enter-name/enter-name.component';
-import {RoomComponent} from './room/room.component';
+import {RoomCheckerComponent} from './room/room-checker.component';
 
 @Component({
     selector: 'my-app',
@@ -11,7 +10,6 @@ import {RoomComponent} from './room/room.component';
 })
 @RouteConfig([
     {path: '/lobby', name: 'Lobby', component: LobbyComponent, useAsDefault: true},
-    {path: '/enter-name/:room', name: 'EnterName',  component: EnterNameComponent},
-    {path: '/room/:room', name: 'Room',  component: RoomComponent},
+    {path: '/room/:room', name: 'Room',  component: RoomCheckerComponent},
 ])
 export class AppComponent {}

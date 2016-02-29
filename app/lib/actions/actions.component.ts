@@ -27,7 +27,7 @@ export class ActionsComponent {
     @Input() state:string;
     @Output() action = new EventEmitter();
 
-    emitAction(action, params = undefined) {
+    emitAction(action:string, params = undefined) {
         this.action.emit({action, params})
     }
 }

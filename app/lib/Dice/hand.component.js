@@ -25,8 +25,8 @@ System.register(['angular2/core', './die.component'], function(exports_1, contex
                 function HandComponent() {
                 }
                 HandComponent.prototype.getArray = function () {
-                    // TODO why is it highlighted as bad?
-                    return Array.from(new Array(this.count), function (x, i) { return i; });
+                    // TODO why is it highlighted as bad when we use .from?
+                    return Array['from'](new Array(this.count), function (x, i) { return i; });
                 };
                 __decorate([
                     core_1.Input(), 
@@ -36,10 +36,14 @@ System.register(['angular2/core', './die.component'], function(exports_1, contex
                     core_1.Input(), 
                     __metadata('design:type', Array)
                 ], HandComponent.prototype, "result", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Number)
+                ], HandComponent.prototype, "roll", void 0);
                 HandComponent = __decorate([
                     core_1.Component({
                         selector: 'hand',
-                        template: "\n        <die *ngFor=\"#i of getArray()\" [style.left.px]=\"i * 50\" [scale]=\"0.5\" [result]=\"result && result[i]\"></die>\n    ",
+                        template: "\n        <die *ngFor=\"#i of getArray()\" [style.left.px]=\"i * 50\" [scale]=\"0.5\" [result]=\"result && result[i]\" [roll]=\"roll\"></die>\n    ",
                         directives: [die_component_1.DieComponent],
                         providers: [],
                     }), 

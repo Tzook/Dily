@@ -10,7 +10,6 @@ export class SocketService {
                 private _logger:Logger) {}
     
     get isConnected() : boolean {
-        this._logger.log(`Is connected: ${this._isConnected}.`);
         return this._isConnected;
     }
     
@@ -18,14 +17,14 @@ export class SocketService {
         return this._socket;
     }
     
-    get myId() {
+    get myId() : string {
         return "/#" + this._socket.id;
     }
     
     connect(name:string, room:string) {
         this._logger.log(`Trying to connect to socket with name ${name} and room ${room}.`);
-        // TODO somehow solve the io issue - it is not known to typescript
-        this._socket = this._window.io(this._window.location.host, {query: "room=" + room + "&name=" + name});
+        // TODO somehow solve the io issue - it is not known to typescript, when using window.io
+        this._socket = this._window['io'](this._window.location.host, {query: "room=" + room + "&name=" + name});
         return new Promise((resolve, reject) => {
             this._socket.on('connect', () => {
                 this._logger.log(`Connected successfully.`);

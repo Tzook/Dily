@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../socket/socket.service', '../players/players.component', '../bet/bet.component', '../socket/events-receiver.service', '../socket/events-emitter.service', '../actions/actions.component'], function(exports_1, context_1) {
+System.register(['angular2/core', '../players/players.component', '../bet/bet.component', '../socket/events-receiver.service', '../socket/events-emitter.service', '../actions/actions.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,18 +10,12 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, socket_service_1, players_component_1, bet_component_1, events_receiver_service_1, events_emitter_service_1, actions_component_1;
+    var core_1, players_component_1, bet_component_1, events_receiver_service_1, events_emitter_service_1, actions_component_1;
     var RoomComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (router_1_1) {
-                router_1 = router_1_1;
-            },
-            function (socket_service_1_1) {
-                socket_service_1 = socket_service_1_1;
             },
             function (players_component_1_1) {
                 players_component_1 = players_component_1_1;
@@ -40,23 +34,12 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
             }],
         execute: function() {
             RoomComponent = (function () {
-                function RoomComponent(_router, _routeParams, _socketService, _eventsReceiverService, _eventsEmitterService) {
-                    this._router = _router;
-                    this._routeParams = _routeParams;
-                    this._socketService = _socketService;
+                function RoomComponent(_eventsReceiverService, _eventsEmitterService) {
                     this._eventsReceiverService = _eventsReceiverService;
                     this._eventsEmitterService = _eventsEmitterService;
-                    if (!this._socketService.isConnected) {
-                        // TODO is there a way to navigate and replace the history?
-                        // OR prevent getting to this page to begin with?
-                        _router.navigate(['EnterName', { room: this._routeParams.get('room') }]);
-                    }
-                    else {
-                        this._players = {};
-                        this._enabled = true;
-                        this._state = "start";
-                        this._bet = { count: 0, die: 0 };
-                    }
+                    this._players = {};
+                    this._state = "start";
+                    this._bet = { count: 0, die: 0 };
                 }
                 RoomComponent.prototype.ngOnInit = function () {
                     var _this = this;
@@ -64,19 +47,16 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                     this._eventsReceiverService.onTurn(this.onTurn.bind(this));
                     this._eventsReceiverService.onStart(function () { return _this._state = "roll"; });
                     this._eventsReceiverService.onRoll(function (id, result) { return _this._players[id].result = result; });
-                    this._eventsReceiverService.onResults(function (id) { return _this._state = (_this._socketService.myId === id ? "next" : ""); });
+                    this._eventsReceiverService.onResults(function (id) { return _this._state = (_this.myId === id ? "next" : ""); });
                     this._eventsReceiverService.onLoseDie(function (id) { return _this._players[id].count--; });
                 };
                 RoomComponent.prototype.ngOnDestroy = function () {
-                    if (this._enabled) {
-                        this._eventsReceiverService.removeOnPlayers();
-                        this._eventsReceiverService.removeOnTurn();
-                        this._eventsReceiverService.removeOnStart();
-                        this._eventsReceiverService.removeOnRoll();
-                        this._eventsReceiverService.removeOnResults();
-                        this._eventsReceiverService.removeOnLoseDie();
-                        this._socketService.disconnect();
-                    }
+                    this._eventsReceiverService.removeOnPlayers();
+                    this._eventsReceiverService.removeOnTurn();
+                    this._eventsReceiverService.removeOnStart();
+                    this._eventsReceiverService.removeOnRoll();
+                    this._eventsReceiverService.removeOnResults();
+                    this._eventsReceiverService.removeOnLoseDie();
                 };
                 RoomComponent.prototype.handleAction = function (action, params) {
                     if (params === void 0) { params = undefined; }
@@ -90,14 +70,18 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                     }
                     this._players[this._turnId = turnId].turn = true;
                 };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', String)
+                ], RoomComponent.prototype, "myId", void 0);
                 RoomComponent = __decorate([
                     core_1.Component({
                         selector: 'room',
-                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n            <bet [hidden]=\"_state !== 'bet'\" [count]=\"_bet.count\" [result]=\"_bet.die\"></bet>\n            <actions [state]=\"_state\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n        </div>\n    ",
+                        template: "\n        <players [list]=\"_players\"></players>\n        <bet [hidden]=\"_state !== 'bet'\" [count]=\"_bet.count\" [result]=\"_bet.die\"></bet>\n        <actions [state]=\"_state\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n    ",
                         directives: [players_component_1.PlayersComponent, bet_component_1.BetComponent, actions_component_1.ActionsComponent],
                         providers: [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService],
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, socket_service_1.SocketService, events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService])
+                    __metadata('design:paramtypes', [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService])
                 ], RoomComponent);
                 return RoomComponent;
             }());

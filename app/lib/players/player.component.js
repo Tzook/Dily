@@ -23,7 +23,14 @@ System.register(['angular2/core', '../dice/hand.component'], function(exports_1,
         execute: function() {
             PlayerComponent = (function () {
                 function PlayerComponent() {
+                    this._roll = 0;
                 }
+                PlayerComponent.prototype.ngOnChanges = function (changes) {
+                    var result = changes.result;
+                    if (result && result.currentValue !== result.previousValue && !result.isFirstChange()) {
+                        this._roll++;
+                    }
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', String)
@@ -43,7 +50,7 @@ System.register(['angular2/core', '../dice/hand.component'], function(exports_1,
                 PlayerComponent = __decorate([
                     core_1.Component({
                         selector: 'player',
-                        template: "\n        <li>\n            <span [ngClass]=\"{'turn': turn}\">{{name}}</span>\n            <hand [count]=\"count\" [result]=\"result\"></hand>\n        </li>\n    ",
+                        template: "\n        <li>\n            <span [ngClass]=\"{'turn': turn}\">{{name}}</span>\n            <hand [count]=\"count\" [result]=\"result\" [roll]=\"_roll\"></hand>\n        </li>\n    ",
                         directives: [hand_component_1.HandComponent],
                         providers: [],
                     }), 

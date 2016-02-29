@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './room.validator'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './room.validator'], functi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, room_validator_1;
+    var core_1, router_1;
     var LobbyComponent;
     return {
         setters:[
@@ -19,29 +19,22 @@ System.register(['angular2/core', 'angular2/router', './room.validator'], functi
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-            },
-            function (room_validator_1_1) {
-                room_validator_1 = room_validator_1_1;
             }],
         execute: function() {
             LobbyComponent = (function () {
-                function LobbyComponent(_router, _roomValidator) {
+                function LobbyComponent(_router) {
                     this._router = _router;
-                    this._roomValidator = _roomValidator;
                 }
-                LobbyComponent.prototype.isRoomInvalid = function (roomNumber) {
-                    return !this._roomValidator.isValid(roomNumber);
-                };
                 LobbyComponent.prototype.joinRoom = function (room) {
-                    this._router.navigate(['EnterName', { room: room }]);
+                    this._router.navigate(['Room', { room: room }]);
                 };
                 LobbyComponent = __decorate([
                     core_1.Component({
                         selector: 'lobby',
-                        template: "\n        <h1>~Dily~</h1>\n        <button (click)=\"joinRoom(0)\">Create room</button>\n        <p>OR</p>\n        <input #room (keyup)=\"0\" type=\"number\" placeholder=\"Room\" max=\"100000\" min=\"1\" required>\n        <button [disabled]=\"isRoomInvalid(room.value)\" (click)=\"joinRoom(room.value)\">Join room</button>\n    ",
-                        providers: [room_validator_1.RoomValidator],
+                        template: "\n        <h1>~Dily~</h1>\n        <button (click)=\"joinRoom(0)\">Create room</button>\n        <p>OR</p>\n        <input #room type=\"number\" placeholder=\"Room\" max=\"100000\" min=\"1\" required>\n        <button (click)=\"joinRoom(room.value)\">Join room</button>\n    ",
+                        providers: [],
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, room_validator_1.RoomValidator])
+                    __metadata('design:paramtypes', [router_1.Router])
                 ], LobbyComponent);
                 return LobbyComponent;
             }());

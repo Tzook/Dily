@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, OnChanges, SimpleChange} from 'angular2/core';
 import {FaceComponent} from './face.component';
 
 const FACES = [
@@ -16,8 +16,8 @@ const INITIAL_TILT = { x: 30, z: 20 };
     template: `
         <div class="layer" [style.transform]="'scale(' + scale + ')'">
             <div class="layer" [style.transform]="_tilt">
-                <div [class]="'layer' + (_roll ? ' roll' : '')" [style.animation-duration]="_flipTime">
-                    <div [class]="'layer result-' + result">
+                <div class="layer" [ngClass]="{'roll': _rolling}" [style.animation-duration]="_flipTime">
+                    <div [class]="'layer result-' + (result || 0)">
                         <face *ngFor="#face of _faces" [class]="face.class" [locations]="face.locations"></face>
                     </div>
                 </div>
@@ -27,31 +27,39 @@ const INITIAL_TILT = { x: 30, z: 20 };
     directives: [FaceComponent],
     providers: [],
 })
-export class DieComponent {
+export class DieComponent implements OnChanges {
     @Input() scale:number;
     @Input() result:number;
+    @Input() roll:number;
+    
     private _faces:any[];
     private _tilt:string;
-    private _roll:boolean;
+    private _rolling:boolean;
     private _flipTime:string;
     
     constructor() {
         this._faces = FACES;
         this._tilt = `rotateX(${INITIAL_TILT.x}deg) rotateZ(${INITIAL_TILT.z}deg)`;
-        this._roll = false;
+        this._rolling = false;
     }
     
-    roll() {
-        // tilt
-        this._roll = false;
+    ngOnChanges(changes:any) {
+        let roll:SimpleChange = changes.roll;
+        if (roll && roll.currentValue !== roll.previousValue && !roll.isFirstChange()) {
+            this.beginRoll();
+        }
+    }
+    private beginRoll() {
+        this._rolling = false;
         setTimeout(() => {
+            // tilt
             var tiltZ = getRandomNumber(0, 360);
             var tiltX = getRandomNumber(20, 35);
             this._tilt = `rotateX(${tiltX}deg) rotateZ(${tiltZ}deg)`;
             
             // flip time
             this._flipTime = (3 + Math.random() * 4) + 's';
-            this._roll = true;
+            this._rolling = true;
         }, 10);
     }
 }

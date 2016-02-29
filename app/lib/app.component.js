@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './lobby/lobby.component', './enter-name/enter-name.component', './room/room.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './lobby/lobby.component', './room/room-checker.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './lobby/lobby.component', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, lobby_component_1, enter_name_component_1, room_component_1;
+    var core_1, router_1, lobby_component_1, room_checker_component_1;
     var AppComponent;
     return {
         setters:[
@@ -23,11 +23,8 @@ System.register(['angular2/core', 'angular2/router', './lobby/lobby.component', 
             function (lobby_component_1_1) {
                 lobby_component_1 = lobby_component_1_1;
             },
-            function (enter_name_component_1_1) {
-                enter_name_component_1 = enter_name_component_1_1;
-            },
-            function (room_component_1_1) {
-                room_component_1 = room_component_1_1;
+            function (room_checker_component_1_1) {
+                room_checker_component_1 = room_checker_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -41,8 +38,7 @@ System.register(['angular2/core', 'angular2/router', './lobby/lobby.component', 
                     }),
                     router_1.RouteConfig([
                         { path: '/lobby', name: 'Lobby', component: lobby_component_1.LobbyComponent, useAsDefault: true },
-                        { path: '/enter-name/:room', name: 'EnterName', component: enter_name_component_1.EnterNameComponent },
-                        { path: '/room/:room', name: 'Room', component: room_component_1.RoomComponent },
+                        { path: '/room/:room', name: 'Room', component: room_checker_component_1.RoomCheckerComponent },
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

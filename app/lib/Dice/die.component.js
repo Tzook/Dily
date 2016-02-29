@@ -38,19 +38,25 @@ System.register(['angular2/core', './face.component'], function(exports_1, conte
                 function DieComponent() {
                     this._faces = FACES;
                     this._tilt = "rotateX(" + INITIAL_TILT.x + "deg) rotateZ(" + INITIAL_TILT.z + "deg)";
-                    this._roll = false;
+                    this._rolling = false;
                 }
-                DieComponent.prototype.roll = function () {
+                DieComponent.prototype.ngOnChanges = function (changes) {
+                    var roll = changes.roll;
+                    if (roll && roll.currentValue !== roll.previousValue && !roll.isFirstChange()) {
+                        this.beginRoll();
+                    }
+                };
+                DieComponent.prototype.beginRoll = function () {
                     var _this = this;
-                    // tilt
-                    this._roll = false;
+                    this._rolling = false;
                     setTimeout(function () {
+                        // tilt
                         var tiltZ = getRandomNumber(0, 360);
                         var tiltX = getRandomNumber(20, 35);
                         _this._tilt = "rotateX(" + tiltX + "deg) rotateZ(" + tiltZ + "deg)";
                         // flip time
                         _this._flipTime = (3 + Math.random() * 4) + 's';
-                        _this._roll = true;
+                        _this._rolling = true;
                     }, 10);
                 };
                 __decorate([
@@ -61,10 +67,14 @@ System.register(['angular2/core', './face.component'], function(exports_1, conte
                     core_1.Input(), 
                     __metadata('design:type', Number)
                 ], DieComponent.prototype, "result", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Number)
+                ], DieComponent.prototype, "roll", void 0);
                 DieComponent = __decorate([
                     core_1.Component({
                         selector: 'die',
-                        template: "\n        <div class=\"layer\" [style.transform]=\"'scale(' + scale + ')'\">\n            <div class=\"layer\" [style.transform]=\"_tilt\">\n                <div [class]=\"'layer' + (_roll ? ' roll' : '')\" [style.animation-duration]=\"_flipTime\">\n                    <div [class]=\"'layer result-' + result\">\n                        <face *ngFor=\"#face of _faces\" [class]=\"face.class\" [locations]=\"face.locations\"></face>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
+                        template: "\n        <div class=\"layer\" [style.transform]=\"'scale(' + scale + ')'\">\n            <div class=\"layer\" [style.transform]=\"_tilt\">\n                <div class=\"layer\" [ngClass]=\"{'roll': _rolling}\" [style.animation-duration]=\"_flipTime\">\n                    <div [class]=\"'layer result-' + (result || 0)\">\n                        <face *ngFor=\"#face of _faces\" [class]=\"face.class\" [locations]=\"face.locations\"></face>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
                         directives: [face_component_1.FaceComponent],
                         providers: [],
                     }), 

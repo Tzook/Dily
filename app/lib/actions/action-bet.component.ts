@@ -16,7 +16,7 @@ export class ActionBetComponent {
     @Output() bet = new EventEmitter();
     @Output() lying = new EventEmitter();
 
-    emitBet(count, die) {
+    emitBet(count:string, die:string) {
         this.bet.emit({count, die});
     }
     
