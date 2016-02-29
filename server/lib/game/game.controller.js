@@ -159,7 +159,7 @@ class GameController {
     getPlayers (players) {
         let result = {};
         players.forEach((player, playerId) => {
-            result[playerId] = player.name;
+            result[playerId] = {name: player.name, count: 5};
         });
         console.info(`Sending the list of players for room ${this.socket.roomKey}:  ${JSON.stringify(result)}.`);        
         return result;

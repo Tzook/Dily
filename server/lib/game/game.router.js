@@ -26,8 +26,8 @@ class GameRouter extends Router {
         let gameController = new GameController(this.io, socket);
         
         socket.emit('room', { room: socket.roomKey }); // tell the player the room number so he can ensure his url is correct
+        // TODO we have to do this in a way that we know the client is ready with all his events
         setTimeout(() => {
-            // need to think about how to implement this
             gameController.emitPlayers();
         }, 100);
         
