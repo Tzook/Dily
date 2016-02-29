@@ -1,4 +1,4 @@
-System.register(['angular2/core', './action-start.component', './action-bet.component'], function(exports_1, context_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,20 +10,16 @@ System.register(['angular2/core', './action-start.component', './action-bet.comp
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, action_start_component_1, action_bet_component_1;
+    var core_1;
     var ActionsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (action_start_component_1_1) {
-                action_start_component_1 = action_start_component_1_1;
-            },
-            function (action_bet_component_1_1) {
-                action_bet_component_1 = action_bet_component_1_1;
             }],
         execute: function() {
+            // import {ActionStartComponent} from './action-start.component';
+            // import {ActionBetComponent} from './action-bet.component';
             ActionsComponent = (function () {
                 function ActionsComponent() {
                     this.action = new core_1.EventEmitter();
@@ -44,7 +40,6 @@ System.register(['angular2/core', './action-start.component', './action-bet.comp
                     core_1.Component({
                         selector: 'actions',
                         template: "\n        <div [ngSwitch]=\"state\">\n            <template ngSwitchWhen=\"start\">\n                <action-start (start)=\"emitAction('start')\"></action-start>\n            </template>\n            <template ngSwitchWhen=\"roll\">\n                <button (click)=\"emitAction('roll')\">roll</button>\n            </template>\n            <template ngSwitchWhen=\"bet\">\n                <action-bet (lying)=\"emitAction('lying')\" (bet)=\"emitAction('bet', $event)\"></action-bet>\n            </template>\n            <template ngSwitchWhen=\"next\">\n                <button (click)=\"emitAction('next')\">continue</button>\n            </template>\n        </div>\n    ",
-                        directives: [action_start_component_1.ActionStartComponent, action_bet_component_1.ActionBetComponent],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ActionsComponent);
