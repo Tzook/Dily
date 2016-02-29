@@ -5,8 +5,8 @@ import {HandComponent} from '../dice/hand.component';
     selector: 'player',
     template: `
         <li>
-            <span [ngClass]="{'turn': _turn}">{{name}}</span>
-            <hand [count]="_count" [result]="result"></hand>
+            <span [ngClass]="{'turn': turn}">{{name}}</span>
+            <hand [count]="count" [result]="result"></hand>
         </li>
     `,
     directives: [HandComponent],
@@ -16,10 +16,5 @@ export class PlayerComponent {
     @Input() name:string;
     @Input() turn:boolean;
     @Input() result:number[];
-    
-    private _count:number;
-    
-    constructor() {
-        this._count = 5;
-    }
+    @Input() count:number;
 }

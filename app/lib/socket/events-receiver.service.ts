@@ -74,4 +74,18 @@ export class EventsReceiverService {
     removeOnRoll() {
         this.removeOnEvent('roll');
     }
+    
+    onResults(fn:Function) {
+        this.onEvent('results', fn, 'id');
+    }
+    removeOnResults() {
+        this.removeOnEvent('results');
+    }
+    
+    onLoseDie(fn:Function) {
+        this.onEvent('lose-die', fn, 'id');
+    }
+    removeOnLoseDie() {
+        this.removeOnEvent('lose-die');
+    }
 }

@@ -84,27 +84,28 @@ player {
     padding-top: 20px;
 }
 
-.bet {
+bet {
     position: relative;
     text-align: center;
 }
 
-.bet h1 {
+bet h1 {
     display: inline-block;
     margin: 0 20px 0 0;
     font-size: 72px;
     font-weight: 400;
 }
 
-.bet h2 {
+bet h2 {
     margin: 0 5px;
 }
 
-.bet die {
+bet die {
     position: relative;
     display: inline-block;
 }
 .bet-values {
+    margin-top: 5px;
     text-align: center;
 }
 .bet-values input {

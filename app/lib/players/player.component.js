@@ -23,7 +23,6 @@ System.register(['angular2/core', '../dice/hand.component'], function(exports_1,
         execute: function() {
             PlayerComponent = (function () {
                 function PlayerComponent() {
-                    this._count = 5;
                 }
                 __decorate([
                     core_1.Input(), 
@@ -37,10 +36,14 @@ System.register(['angular2/core', '../dice/hand.component'], function(exports_1,
                     core_1.Input(), 
                     __metadata('design:type', Array)
                 ], PlayerComponent.prototype, "result", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Number)
+                ], PlayerComponent.prototype, "count", void 0);
                 PlayerComponent = __decorate([
                     core_1.Component({
                         selector: 'player',
-                        template: "\n        <li>\n            <span [ngClass]=\"{'turn': _turn}\">{{name}}</span>\n            <hand [count]=\"_count\" [result]=\"result\"></hand>\n        </li>\n    ",
+                        template: "\n        <li>\n            <span [ngClass]=\"{'turn': turn}\">{{name}}</span>\n            <hand [count]=\"count\" [result]=\"result\"></hand>\n        </li>\n    ",
                         directives: [hand_component_1.HandComponent],
                         providers: [],
                     }), 

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../socket/socket.service', '../players/players.component', '../socket/events-receiver.service', '../socket/events-emitter.service', '../actions/actions.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../socket/socket.service', '../players/players.component', '../bet/bet.component', '../socket/events-receiver.service', '../socket/events-emitter.service', '../actions/actions.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, socket_service_1, players_component_1, events_receiver_service_1, events_emitter_service_1, actions_component_1;
+    var core_1, router_1, socket_service_1, players_component_1, bet_component_1, events_receiver_service_1, events_emitter_service_1, actions_component_1;
     var RoomComponent;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
             },
             function (players_component_1_1) {
                 players_component_1 = players_component_1_1;
+            },
+            function (bet_component_1_1) {
+                bet_component_1 = bet_component_1_1;
             },
             function (events_receiver_service_1_1) {
                 events_receiver_service_1 = events_receiver_service_1_1;
@@ -52,18 +55,17 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                         this._players = {};
                         this._enabled = true;
                         this._state = "start";
+                        this._bet = { count: 0, die: 0 };
                     }
                 }
                 RoomComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._eventsReceiverService.onPlayers(function (players) { return _this._players = players; });
-                    this._eventsReceiverService.onTurn(function (turnId, bet) {
-                        _this._state = "bet";
-                        _this._turnId = turnId;
-                        _this._bet = bet;
-                    });
+                    this._eventsReceiverService.onTurn(this.onTurn.bind(this));
                     this._eventsReceiverService.onStart(function () { return _this._state = "roll"; });
                     this._eventsReceiverService.onRoll(function (id, result) { return _this._players[id].result = result; });
+                    this._eventsReceiverService.onResults(function (id) { return _this._state = (_this._socketService.myId === id ? "next" : ""); });
+                    this._eventsReceiverService.onLoseDie(function (id) { return _this._players[id].count--; });
                 };
                 RoomComponent.prototype.ngOnDestroy = function () {
                     if (this._enabled) {
@@ -71,6 +73,8 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                         this._eventsReceiverService.removeOnTurn();
                         this._eventsReceiverService.removeOnStart();
                         this._eventsReceiverService.removeOnRoll();
+                        this._eventsReceiverService.removeOnResults();
+                        this._eventsReceiverService.removeOnLoseDie();
                         this._socketService.disconnect();
                     }
                 };
@@ -78,11 +82,19 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                     if (params === void 0) { params = undefined; }
                     this._eventsEmitterService.emitAction(action, params);
                 };
+                RoomComponent.prototype.onTurn = function (turnId, bet) {
+                    this._state = "bet";
+                    this._bet = bet;
+                    if (this._turnId) {
+                        this._players[this._turnId].turn = false;
+                    }
+                    this._players[this._turnId = turnId].turn = true;
+                };
                 RoomComponent = __decorate([
                     core_1.Component({
                         selector: 'room',
-                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n            <actions [state]=\"_state\" [isMyTurn]=\"_turnId === _socketService.myId\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n        </div>\n    ",
-                        directives: [players_component_1.PlayersComponent, actions_component_1.ActionsComponent],
+                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n            <bet [hidden]=\"_state !== 'bet'\" [count]=\"_bet.count\" [result]=\"_bet.die\"></bet>\n            <actions [state]=\"_state\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n        </div>\n    ",
+                        directives: [players_component_1.PlayersComponent, bet_component_1.BetComponent, actions_component_1.ActionsComponent],
                         providers: [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService],
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, router_1.RouteParams, socket_service_1.SocketService, events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService])

@@ -5,7 +5,7 @@ import {PlayerComponent} from './player.component';
     selector: 'players',
     template: `
         <ul class="players">
-            <player *ngFor="#player of getPlayers()" [name]="player.name" [result]="player.result"></player>
+            <player *ngFor="#player of getPlayers()" [name]="player.name" [result]="player.result" [turn]="player.turn" [count]="player.count"></player>
         </ul>
     `,
     directives: [PlayerComponent],

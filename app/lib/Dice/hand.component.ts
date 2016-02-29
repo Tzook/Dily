@@ -4,7 +4,7 @@ import {DieComponent} from './die.component';
 @Component({
     selector: 'hand',
     template: `
-        <die *ngFor="#i of getArray()" [style.left.px]="i * 50" [scale]="0.5" [result]="result && result[i]">A die {{i}}</die>
+        <die *ngFor="#i of getArray()" [style.left.px]="i * 50" [scale]="0.5" [result]="result && result[i]"></die>
     `,
     directives: [DieComponent],
     providers: [],

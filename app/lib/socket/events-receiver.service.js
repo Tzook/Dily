@@ -87,6 +87,18 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                 EventsReceiverService.prototype.removeOnRoll = function () {
                     this.removeOnEvent('roll');
                 };
+                EventsReceiverService.prototype.onResults = function (fn) {
+                    this.onEvent('results', fn, 'id');
+                };
+                EventsReceiverService.prototype.removeOnResults = function () {
+                    this.removeOnEvent('results');
+                };
+                EventsReceiverService.prototype.onLoseDie = function (fn) {
+                    this.onEvent('lose-die', fn, 'id');
+                };
+                EventsReceiverService.prototype.removeOnLoseDie = function () {
+                    this.removeOnEvent('lose-die');
+                };
                 EventsReceiverService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [logger_1.Logger, socket_service_1.SocketService])

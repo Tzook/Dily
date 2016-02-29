@@ -1,4 +1,4 @@
-System.register(['angular2/core', './die.component'], function(exports_1, context_1) {
+System.register(['angular2/core', '../dice/die.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -11,7 +11,7 @@ System.register(['angular2/core', './die.component'], function(exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, die_component_1;
-    var HandComponent;
+    var BetComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -21,34 +21,30 @@ System.register(['angular2/core', './die.component'], function(exports_1, contex
                 die_component_1 = die_component_1_1;
             }],
         execute: function() {
-            HandComponent = (function () {
-                function HandComponent() {
+            BetComponent = (function () {
+                function BetComponent() {
                 }
-                HandComponent.prototype.getArray = function () {
-                    // TODO why is it highlighted as bad?
-                    return Array.from(new Array(this.count), function (x, i) { return i; });
-                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Number)
-                ], HandComponent.prototype, "count", void 0);
+                ], BetComponent.prototype, "count", void 0);
                 __decorate([
                     core_1.Input(), 
-                    __metadata('design:type', Array)
-                ], HandComponent.prototype, "result", void 0);
-                HandComponent = __decorate([
+                    __metadata('design:type', Number)
+                ], BetComponent.prototype, "result", void 0);
+                BetComponent = __decorate([
                     core_1.Component({
-                        selector: 'hand',
-                        template: "\n        <die *ngFor=\"#i of getArray()\" [style.left.px]=\"i * 50\" [scale]=\"0.5\" [result]=\"result && result[i]\"></die>\n    ",
+                        selector: 'bet',
+                        template: "\n        <h2>Current bet</h2>\n        <h1>{{count}}</h1>\n        <die [scale]=\"1\" [result]=\"result\"></die>\n    ",
                         directives: [die_component_1.DieComponent],
                         providers: [],
                     }), 
                     __metadata('design:paramtypes', [])
-                ], HandComponent);
-                return HandComponent;
+                ], BetComponent);
+                return BetComponent;
             }());
-            exports_1("HandComponent", HandComponent);
+            exports_1("BetComponent", BetComponent);
         }
     }
 });
-//# sourceMappingURL=hand.component.js.map
+//# sourceMappingURL=bet.component.js.map
