@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core';
-// import {ActionStartComponent} from './action-start.component';
-// import {ActionBetComponent} from './action-bet.component';
+import {ActionStartComponent} from './action-start.component';
+import {ActionBetComponent} from './action-bet.component';
 
 @Component({
     selector: 'actions',
@@ -20,7 +20,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
             </template>
         </div>
     `,
-    // directives: [ActionStartComponent, ActionBetComponent],
+    directives: [ActionStartComponent, ActionBetComponent],
 })
 export class ActionsComponent {
     @Input() state:string;
