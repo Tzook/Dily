@@ -14,6 +14,7 @@ export class HandComponent {
     @Input() result:number[];
     @Input() roll:number;
     
+    // angular 2 can use ngFor only on arrays, so we must convert the object to array
     getArray() : number[] {
         // TODO why is it highlighted as bad when we use .from?
         return Array['from'](new Array(this.count), (x, i) => i);

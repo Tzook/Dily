@@ -24,6 +24,7 @@ System.register(['angular2/core', './die.component'], function(exports_1, contex
             HandComponent = (function () {
                 function HandComponent() {
                 }
+                // angular 2 can use ngFor only on arrays, so we must convert the object to array
                 HandComponent.prototype.getArray = function () {
                     // TODO why is it highlighted as bad when we use .from?
                     return Array['from'](new Array(this.count), function (x, i) { return i; });
