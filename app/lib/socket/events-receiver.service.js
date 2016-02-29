@@ -32,14 +32,19 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                 }
                 EventsReceiverService.prototype.onEvent = function (event, fn) {
                     var _this = this;
-                    this._logger.log("Adding " + event + " listener.");
+                    var args = [];
+                    for (var _i = 2; _i < arguments.length; _i++) {
+                        args[_i - 2] = arguments[_i];
+                    }
+                    this._logger.log("Adding " + event + " listener, with " + JSON.stringify(args) + " arguments.");
                     if (this._events.has(event)) {
                         this._logger.log("Already registered the event " + event + "!");
                     }
                     this._events.add(event);
                     this._socket.on(event, function (data) {
                         _this._logger.log("Got " + event + " data: " + JSON.stringify(data) + ".");
-                        fn(data[event]);
+                        var dataValues = _this.grabDataFields(args, data);
+                        fn.apply(fn, dataValues);
                     });
                 };
                 EventsReceiverService.prototype.removeOnEvent = function (event) {
@@ -50,17 +55,37 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                     this._events.delete(event);
                     this._socket.removeListener(event);
                 };
+                EventsReceiverService.prototype.grabDataFields = function (args, data) {
+                    var dataValues = [];
+                    for (var i in args) {
+                        var argValue = args[i];
+                        dataValues[i] = data[argValue];
+                    }
+                    return dataValues;
+                };
                 EventsReceiverService.prototype.onPlayers = function (fn) {
-                    this.onEvent('users', fn);
+                    this.onEvent('users', fn, 'users');
                 };
                 EventsReceiverService.prototype.removeOnPlayers = function () {
                     this.removeOnEvent('users');
                 };
                 EventsReceiverService.prototype.onTurn = function (fn) {
-                    this.onEvent('turn', fn);
+                    this.onEvent('turn', fn, 'id', 'bet');
                 };
                 EventsReceiverService.prototype.removeOnTurn = function () {
                     this.removeOnEvent('turn');
+                };
+                EventsReceiverService.prototype.onStart = function (fn) {
+                    this.onEvent('start', fn);
+                };
+                EventsReceiverService.prototype.removeOnStart = function () {
+                    this.removeOnEvent('start');
+                };
+                EventsReceiverService.prototype.onRoll = function (fn) {
+                    this.onEvent('roll', fn, 'id', 'result');
+                };
+                EventsReceiverService.prototype.removeOnRoll = function () {
+                    this.removeOnEvent('roll');
                 };
                 EventsReceiverService = __decorate([
                     core_1.Injectable(), 

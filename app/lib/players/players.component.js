@@ -35,7 +35,7 @@ System.register(['angular2/core', './player.component'], function(exports_1, con
                 PlayersComponent = __decorate([
                     core_1.Component({
                         selector: 'players',
-                        template: "\n        <ul class=\"players\">\n            <player *ngFor=\"#player of getPlayers()\" [name]=\"player.name\"></player>\n        </ul>\n    ",
+                        template: "\n        <ul class=\"players\">\n            <player *ngFor=\"#player of getPlayers()\" [name]=\"player.name\" [result]=\"player.result\"></player>\n        </ul>\n    ",
                         directives: [player_component_1.PlayerComponent],
                     }), 
                     __metadata('design:paramtypes', [])

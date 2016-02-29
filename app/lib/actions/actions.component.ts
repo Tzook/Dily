@@ -14,7 +14,7 @@ import {ActionBetComponent} from './action-bet.component';
                 <button (click)="emitAction('roll')">roll</button>
             </template>
             <template ngSwitchWhen="bet">
-                <action-bet [disableButtons]="!isYourTurn" (lying)="emitAction('lying')" (bet)="emitAction('bet', $event)"></action-bet>
+                <action-bet [disableButtons]="!isMyTurn" (lying)="emitAction('lying')" (bet)="emitAction('bet', $event)"></action-bet>
             </template>
             <template ngSwitchWhen="next">
                 <button (click)="emitAction('next')">continue</button>
@@ -25,7 +25,7 @@ import {ActionBetComponent} from './action-bet.component';
 })
 export class ActionsComponent {
     @Input() state:string;
-    @Input() isYourTurn:boolean;
+    @Input() isMyTurn:boolean;
     @Output() action = new EventEmitter();
 
     emitAction(action, params = undefined) {

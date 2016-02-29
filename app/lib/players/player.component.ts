@@ -6,7 +6,7 @@ import {HandComponent} from '../dice/hand.component';
     template: `
         <li>
             <span [ngClass]="{'turn': _turn}">{{name}}</span>
-            <hand [count]="_count"></hand>
+            <hand [count]="_count" [result]="result"></hand>
         </li>
     `,
     directives: [HandComponent],
@@ -15,6 +15,8 @@ import {HandComponent} from '../dice/hand.component';
 export class PlayerComponent {
     @Input() name:string;
     @Input() turn:boolean;
+    @Input() result:number[];
+    
     private _count:number;
     
     constructor() {

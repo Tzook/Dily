@@ -57,12 +57,20 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                 RoomComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._eventsReceiverService.onPlayers(function (players) { return _this._players = players; });
-                    this._eventsReceiverService.onTurn(function (turnId) { return _this._turnId = turnId; });
+                    this._eventsReceiverService.onTurn(function (turnId, bet) {
+                        _this._state = "bet";
+                        _this._turnId = turnId;
+                        _this._bet = bet;
+                    });
+                    this._eventsReceiverService.onStart(function () { return _this._state = "roll"; });
+                    this._eventsReceiverService.onRoll(function (id, result) { return _this._players[id].result = result; });
                 };
                 RoomComponent.prototype.ngOnDestroy = function () {
                     if (this._enabled) {
                         this._eventsReceiverService.removeOnPlayers();
                         this._eventsReceiverService.removeOnTurn();
+                        this._eventsReceiverService.removeOnStart();
+                        this._eventsReceiverService.removeOnRoll();
                         this._socketService.disconnect();
                     }
                 };
@@ -73,7 +81,7 @@ System.register(['angular2/core', 'angular2/router', '../socket/socket.service',
                 RoomComponent = __decorate([
                     core_1.Component({
                         selector: 'room',
-                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n            <actions [state]=\"_state\" [isYourTurn]=\"_turnId === _socketService.myId\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n        </div>\n    ",
+                        template: "\n        <div *ngIf=\"_enabled\">\n            <players [list]=\"_players\"></players>\n            <actions [state]=\"_state\" [isMyTurn]=\"_turnId === _socketService.myId\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n        </div>\n    ",
                         directives: [players_component_1.PlayersComponent, actions_component_1.ActionsComponent],
                         providers: [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService],
                     }), 

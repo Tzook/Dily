@@ -11,7 +11,7 @@ import {ActionsComponent} from '../actions/actions.component';
     template: `
         <div *ngIf="_enabled">
             <players [list]="_players"></players>
-            <actions [state]="_state" [isYourTurn]="_turnId === _socketService.myId" (action)="handleAction($event.action, $event.params)"></actions>
+            <actions [state]="_state" [isMyTurn]="_turnId === _socketService.myId" (action)="handleAction($event.action, $event.params)"></actions>
         </div>
     `,
     directives: [PlayersComponent, ActionsComponent],
@@ -22,6 +22,7 @@ export class RoomComponent implements OnInit, OnDestroy {
     private _players:Object;
     private _state:string;
     private _turnId:string;
+    private _bet:Object;
     
     constructor(private _router:Router,
                 private _routeParams:RouteParams,
@@ -41,13 +42,21 @@ export class RoomComponent implements OnInit, OnDestroy {
     
     ngOnInit() {
         this._eventsReceiverService.onPlayers(players => this._players = players);
-        this._eventsReceiverService.onTurn(turnId => this._turnId = turnId);
+        this._eventsReceiverService.onTurn((turnId, bet) => {
+            this._state = "bet";
+            this._turnId = turnId;
+            this._bet = bet;
+        });
+        this._eventsReceiverService.onStart(() => this._state = "roll");
+        this._eventsReceiverService.onRoll((id, result) => this._players[id].result = result);
     }
     
     ngOnDestroy() {
         if (this._enabled) {
             this._eventsReceiverService.removeOnPlayers();
             this._eventsReceiverService.removeOnTurn();
+            this._eventsReceiverService.removeOnStart();
+            this._eventsReceiverService.removeOnRoll();
             this._socketService.disconnect();
         }
     }
