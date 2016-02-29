@@ -9,4 +9,5 @@ import {provide} from 'angular2/core';
 
 let windowProvide = provide(Window, {useValue: window}); 
 
+console.log('bootstrapping');
 bootstrap(AppComponent, [ROUTER_PROVIDERS, Logger, SocketService, windowProvide]);

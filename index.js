@@ -26,6 +26,7 @@ System.register(['./app/lib/app.component', './app/lib/logger/logger', './app/li
             }],
         execute: function() {
             windowProvide = core_1.provide(Window, { useValue: window });
+            console.log('bootstrapping');
             browser_1.bootstrap(app_component_1.AppComponent, [router_1.ROUTER_PROVIDERS, logger_1.Logger, socket_service_1.SocketService, windowProvide]);
         }
     }
