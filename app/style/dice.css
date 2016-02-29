@@ -72,12 +72,12 @@ face.five {
     transform: rotateX( 90deg) translateZ(25px);
 }
 
-.result-0 dot {
+.result-0 .dot {
     display: none;
 }
 
 /* Dice dots on its faces */
-dot {
+.dot {
     width: 10px;
     height: 10px;
     background: black;
@@ -85,31 +85,31 @@ dot {
     position: absolute;
     border-radius: 100%;
 }
-dot.t-l {
+.dot.t-l {
     top: 10%;
     left: 10%;
 }
-dot.m-m {
+.dot.m-m {
     top: calc(50% - 5px);
     left: calc(50% - 5px);
 }
-dot.b-r {
+.dot.b-r {
     right: 10%;
     bottom: 10%;
 }
-dot.t-r {
+.dot.t-r {
     top: 10%;
     right: 10%;
 }
-dot.b-l {
+.dot.b-l {
     bottom: 10%;
     left: 10%;
 }
-dot.m-l {
+.dot.m-l {
     left: 10%;
     top: calc(50% - 5px);
 }
-dot.m-r {
+.dot.m-r {
     right: 10%;
     top: calc(50% - 5px);
 }

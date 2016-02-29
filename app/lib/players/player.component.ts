@@ -1,6 +1,5 @@
 import {Component, Input, OnChanges, SimpleChange} from 'angular2/core';
 import {HandComponent} from '../dice/hand.component';
-import {FaceComponent} from '../dice/face.component';
 
 @Component({
     selector: 'player',

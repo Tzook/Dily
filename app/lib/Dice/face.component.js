@@ -28,7 +28,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 FaceComponent = __decorate([
                     core_1.Component({
                         selector: 'face',
-                        template: "\n        <dot *ngFor=\"#location of locations\" [class]=\"location\"></dot>\n    ",
+                        template: "\n        <span class=\"dot\" *ngFor=\"#location of locations\" [ngClass]=\"location\"></span>\n    ",
                         directives: [],
                         providers: [],
                     }), 
