@@ -1,5 +1,4 @@
 import {Component, OnDestroy} from 'angular2/core';
-import {NgSwitch, NgSwitchWhen, NgSwitchDefault} from 'angular2/common';
 import {Router, RouteParams} from 'angular2/router';
 import {SocketService} from '../socket/socket.service';
 import {EnterNameComponent} from './enter-name.component';
@@ -17,7 +16,7 @@ import {RoomComponent} from './room.component';
             </template>
         </div>
     `,
-    directives: [EnterNameComponent, RoomComponent, NgSwitch],
+    directives: [EnterNameComponent, RoomComponent],
     providers: [],
 })
 export class RoomCheckerComponent implements OnDestroy {

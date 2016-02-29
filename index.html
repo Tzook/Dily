@@ -25,7 +25,6 @@
     <script src="app/scripts/game-actions.js"></script>
     <script src="app/scripts/bet.js"></script>
     <script src="app/scripts/init.js"></script>-->
-    <script src="app/scripts/externals/socket-io.min.js"></script>
     <script src="node_modules/es6-shim/es6-shim.min.js"></script>
     <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
     <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
@@ -35,8 +34,9 @@
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
     <script src="node_modules/angular2/bundles/router.dev.js"></script>
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="node_modules/socket.io-client/socket.io.js"></script>
     <script>
-        System.config({packages: {app: {format: 'register',defaultExtension: 'js'}}});
+        System.config({packages: {app: {format: 'register', defaultExtension: 'js'}}});
         System.import('index.js');
     </script>		
 </body>

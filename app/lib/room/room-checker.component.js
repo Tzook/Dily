@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/router', '../socket/socket.service', './enter-name.component', './room.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../socket/socket.service', './enter-name.component', './room.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,12 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../sock
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, router_1, socket_service_1, enter_name_component_1, room_component_1;
+    var core_1, router_1, socket_service_1, enter_name_component_1, room_component_1;
     var RoomCheckerComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (common_1_1) {
-                common_1 = common_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -52,7 +49,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../sock
                     core_1.Component({
                         selector: 'room-checker',
                         template: "\n        <div [ngSwitch]=\"_socketService.isConnected\">\n            <template ngSwitchDefault>\n                <enter-name (connect)=\"connect($event)\" [error]=\"_error\"></enter-name>\n            </template>\n            <template [ngSwitchWhen]=\"true\">\n                <room [myId]=\"_socketService.myId\"></room>\n            </template>\n        </div>\n    ",
-                        directives: [enter_name_component_1.EnterNameComponent, room_component_1.RoomComponent, common_1.NgSwitch],
+                        directives: [enter_name_component_1.EnterNameComponent, room_component_1.RoomComponent],
                         providers: [],
                     }), 
                     __metadata('design:paramtypes', [socket_service_1.SocketService, router_1.Router, router_1.RouteParams])

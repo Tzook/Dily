@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core';
-import {NgSwitch, NgSwitchWhen} from 'angular2/common';
 import {ActionStartComponent} from './action-start.component';
 import {ActionBetComponent} from './action-bet.component';
 
@@ -21,7 +20,7 @@ import {ActionBetComponent} from './action-bet.component';
             </template>
         </div>
     `,
-    directives: [NgSwitch, NgSwitchWhen, ActionStartComponent, ActionBetComponent],
+    directives: [ActionStartComponent, ActionBetComponent],
 })
 export class ActionsComponent {
     @Input() state:string;
