@@ -64,6 +64,13 @@ class GameController {
             setTimeout(() => {
                 this.io.to(this.socket.roomKey).emit('begin-bets');
                 room.turns = room.players.keys();
+                // Decides randomally who begins the next round
+                let size = room.size;
+                let random = this.mathHelper.getRandomNumber(0, size - 1);
+                console.log(`skipping turn to player number ${random}`);
+                while (random--) {
+                    room.turn = room.turns.next();
+                }
                 this.nextTurn(0, 0);
             }, 2000);
         }
