@@ -29,7 +29,7 @@ class GameRouter extends Router {
         // TODO we have to do this in a way that we know the client is ready with all his events
         setTimeout(() => {
             gameController.emitPlayers();
-        }, 100);
+        }, 1000);
         
         socket.on('disconnect', (gameController.disconnect).bind(gameController));
         socket.on('start', (gameController.start).bind(gameController));

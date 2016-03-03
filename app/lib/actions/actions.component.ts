@@ -10,7 +10,7 @@ import {ActionBetComponent} from './action-bet.component';
                 <action-start (start)="emitAction('start')"></action-start>
             </template>
             <template ngSwitchWhen="roll">
-                <button (click)="emitAction('roll')">roll</button>
+                <button #rollButton (click)="emitAction('roll'); rollButton.disabled = true;">roll</button>
             </template>
             <template ngSwitchWhen="bet">
                 <action-bet (lying)="emitAction('lying')" (bet)="emitAction('bet', $event)"></action-bet>
