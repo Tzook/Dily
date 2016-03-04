@@ -33,6 +33,7 @@ export class RoomCheckerComponent implements OnDestroy {
     }
     
     ngOnDestroy() {
-        this._socketService.disconnect();
+        // TODO
+        // this._socketService.disconnect();
     }
 }
