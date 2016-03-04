@@ -39,11 +39,11 @@ System.register(['angular2/core', './action-start.component', './action-bet.comp
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Boolean)
-                ], ActionsComponent.prototype, "noBet", void 0);
+                ], ActionsComponent.prototype, "hasBet", void 0);
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Boolean)
-                ], ActionsComponent.prototype, "notMyTurn", void 0);
+                ], ActionsComponent.prototype, "myTurn", void 0);
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
@@ -51,7 +51,7 @@ System.register(['angular2/core', './action-start.component', './action-bet.comp
                 ActionsComponent = __decorate([
                     core_1.Component({
                         selector: 'actions',
-                        template: "\n        <div [ngSwitch]=\"state\">\n            <template ngSwitchWhen=\"start\">\n                <action-start (start)=\"emitAction('start')\"></action-start>\n            </template>\n            <template ngSwitchWhen=\"roll\">\n                <button #rollButton (click)=\"emitAction('roll'); rollButton.disabled = true;\">roll</button>\n            </template>\n            <template ngSwitchWhen=\"bet\">\n                <action-bet [notMyTurn]=\"notMyTurn\" [noBet]=\"noBet\" (lying)=\"emitAction('lying')\" (bet)=\"emitAction('bet', $event)\"></action-bet>\n            </template>\n            <template ngSwitchWhen=\"next\">\n                <button (click)=\"emitAction('next')\">continue</button>\n            </template>\n        </div>\n    ",
+                        template: "\n        <div [ngSwitch]=\"state\">\n            <template ngSwitchWhen=\"start\">\n                <action-start (start)=\"emitAction('start')\"></action-start>\n            </template>\n            <template ngSwitchWhen=\"roll\">\n                <button #rollButton (click)=\"rollButton.disabled = true; emitAction('roll');\">roll</button>\n            </template>\n            <template ngSwitchWhen=\"bet\">\n                <action-bet [disableBet]=\"!myTurn\" [disableLying]=\"!myTurn || !hasBet\" (lying)=\"emitAction('lying')\" (bet)=\"emitAction('bet', $event)\"></action-bet>\n            </template>\n            <template ngSwitchWhen=\"next\">\n                <button (click)=\"emitAction('next')\">continue</button>\n            </template>\n        </div>\n    ",
                         directives: [action_start_component_1.ActionStartComponent, action_bet_component_1.ActionBetComponent],
                     }), 
                     __metadata('design:paramtypes', [])

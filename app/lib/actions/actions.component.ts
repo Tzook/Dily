@@ -10,10 +10,10 @@ import {ActionBetComponent} from './action-bet.component';
                 <action-start (start)="emitAction('start')"></action-start>
             </template>
             <template ngSwitchWhen="roll">
-                <button #rollButton (click)="emitAction('roll'); rollButton.disabled = true;">roll</button>
+                <button #rollButton (click)="rollButton.disabled = true; emitAction('roll');">roll</button>
             </template>
             <template ngSwitchWhen="bet">
-                <action-bet [notMyTurn]="notMyTurn" [noBet]="noBet" (lying)="emitAction('lying')" (bet)="emitAction('bet', $event)"></action-bet>
+                <action-bet [disableBet]="!myTurn" [disableLying]="!myTurn || !hasBet" (lying)="emitAction('lying')" (bet)="emitAction('bet', $event)"></action-bet>
             </template>
             <template ngSwitchWhen="next">
                 <button (click)="emitAction('next')">continue</button>
@@ -24,8 +24,8 @@ import {ActionBetComponent} from './action-bet.component';
 })
 export class ActionsComponent {
     @Input() state:string;
-    @Input() noBet:boolean;
-    @Input() notMyTurn:boolean;
+    @Input() hasBet:boolean;
+    @Input() myTurn:boolean;
     @Output() action = new EventEmitter();
 
     emitAction(action:string, params = undefined) {

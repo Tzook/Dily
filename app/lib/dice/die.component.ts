@@ -16,7 +16,7 @@ const INITIAL_TILT = { x: 30, z: 20 };
     template: `
         <div class="layer" [style.transform]="'scale(' + scale + ')'">
             <div class="layer" [style.transform]="_tilt">
-                <div class="layer" [ngClass]="{'roll': _rolling}" [style.animation-duration]="_flipTime">
+                <div class="layer" [class.rolll]="_rolling" [style.animation-duration]="_flipTime">
                     <div [class]="'layer result-' + (result || 0)">
                         <face *ngFor="#face of _faces" [class]="face.class" [locations]="face.locations"></face>
                     </div>

@@ -32,11 +32,11 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Boolean)
-                ], ActionBetComponent.prototype, "noBet", void 0);
+                ], ActionBetComponent.prototype, "disableBet", void 0);
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Boolean)
-                ], ActionBetComponent.prototype, "notMyTurn", void 0);
+                ], ActionBetComponent.prototype, "disableLying", void 0);
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
@@ -48,7 +48,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 ActionBetComponent = __decorate([
                     core_1.Component({
                         selector: 'action-bet',
-                        template: "\n        <div class=\"bet-values\">\n            <input #count (keyup)=\"0\" (mouseup)=\"0\" type=\"number\" min=\"1\" max=\"99\">\n            <input #die (keyup)=\"0\" (mouseup)=\"0\" type=\"number\" min=\"1\" max=\"6\">\n        </div>\n        <button [disabled]=\"notMyTurn || !count.value || !die.value\" (click)=\"emitBet(count.value, die.value); count.value = die.value = ''\">bet</button>\n        <button [disabled]=\"notMyTurn || noBet\" (click)=\"emitLying()\">lying!</button>\n    ",
+                        template: "\n        <div class=\"bet-values\">\n            <input #count (keyup)=\"0\" (mouseup)=\"0\" type=\"number\" min=\"1\" max=\"99\">\n            <input #die (keyup)=\"0\" (mouseup)=\"0\" type=\"number\" min=\"1\" max=\"6\">\n        </div>\n        <button [disabled]=\"disableBet || !count.value || !die.value\" (click)=\"emitBet(count.value, die.value); count.value = die.value = ''\">bet</button>\n        <button [disabled]=\"disableLying\" (click)=\"emitLying()\">lying!</button>\n    ",
                         directives: [],
                     }), 
                     __metadata('design:paramtypes', [])

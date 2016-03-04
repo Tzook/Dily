@@ -9,9 +9,9 @@ import {ActionsComponent} from '../actions/actions.component';
     selector: 'room',
     template: `
         <players [list]="_players"></players>
-        <h1 [hidden]="myId != _turnId">YOUR TURN!</h1>
-        <bet [hidden]="_state !== 'bet'" [count]="_bet.count" [result]="_bet.die"></bet>
-        <actions [state]="_state" [noBet]="_bet.count == 0" [notMyTurn]="myId != _turnId" (action)="handleAction($event.action, $event.params)"></actions>
+        <h1 [hidden]="myId != _turnId || _state != 'bet'">YOUR TURN!</h1>
+        <bet [hidden]="_state != 'bet'" [count]="_bet.count" [result]="_bet.die"></bet>
+        <actions [state]="_state" [hasBet]="_bet.count > 0" [myTurn]="myId == _turnId" (action)="handleAction($event.action, $event.params)"></actions>
     `,
     directives: [PlayersComponent, BetComponent, ActionsComponent],
     providers: [EventsReceiverService, EventsEmitterService],

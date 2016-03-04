@@ -77,7 +77,7 @@ System.register(['angular2/core', '../players/players.component', '../bet/bet.co
                 RoomComponent = __decorate([
                     core_1.Component({
                         selector: 'room',
-                        template: "\n        <players [list]=\"_players\"></players>\n        <h1 [hidden]=\"myId != _turnId\">YOUR TURN!</h1>\n        <bet [hidden]=\"_state !== 'bet'\" [count]=\"_bet.count\" [result]=\"_bet.die\"></bet>\n        <actions [state]=\"_state\" [noBet]=\"_bet.count == 0\" [notMyTurn]=\"myId != _turnId\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n    ",
+                        template: "\n        <players [list]=\"_players\"></players>\n        <h1 [hidden]=\"myId != _turnId || _state != 'bet'\">YOUR TURN!</h1>\n        <bet [hidden]=\"_state != 'bet'\" [count]=\"_bet.count\" [result]=\"_bet.die\"></bet>\n        <actions [state]=\"_state\" [hasBet]=\"_bet.count > 0\" [myTurn]=\"myId == _turnId\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n    ",
                         directives: [players_component_1.PlayersComponent, bet_component_1.BetComponent, actions_component_1.ActionsComponent],
                         providers: [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService],
                     }), 
