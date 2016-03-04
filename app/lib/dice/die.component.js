@@ -74,7 +74,7 @@ System.register(['angular2/core', './face.component'], function(exports_1, conte
                 DieComponent = __decorate([
                     core_1.Component({
                         selector: 'die',
-                        template: "\n        <div class=\"layer\" [style.transform]=\"'scale(' + scale + ')'\">\n            <div class=\"layer\" [style.transform]=\"_tilt\">\n                <div class=\"layer\" [class.rolll]=\"_rolling\" [style.animation-duration]=\"_flipTime\">\n                    <div [class]=\"'layer result-' + (result || 0)\">\n                        <face *ngFor=\"#face of _faces\" [class]=\"face.class\" [locations]=\"face.locations\"></face>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
+                        template: "\n        <div class=\"layer\" [style.transform]=\"'scale(' + scale + ')'\">\n            <div class=\"layer\" [style.transform]=\"_tilt\">\n                <div class=\"layer\" [class.roll]=\"_rolling\" [style.animation-duration]=\"_flipTime\">\n                    <div [class]=\"'layer result-' + (result || 0)\">\n                        <face *ngFor=\"#face of _faces\" [class]=\"face.class\" [locations]=\"face.locations\"></face>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
                         directives: [face_component_1.FaceComponent],
                         providers: [],
                     }), 

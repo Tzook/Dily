@@ -50,6 +50,8 @@ export class SocketService {
     }
     
     disconnect() {
-        this._logger.log(`Disconnecting socket. TODO!`);        
+        this._logger.log(`Disconnecting socket.`);
+        this._socket.disconnect();
+        this._isConnected = false;        
     }
 }

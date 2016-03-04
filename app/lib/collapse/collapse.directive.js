@@ -25,15 +25,18 @@ System.register(['angular2/core', 'angular2/src/animate/animation_builder'], fun
             CollapseDirective = (function () {
                 function CollapseDirective(_animationBuilder, el) {
                     this._animationBuilder = _animationBuilder;
+                    this.animationStable = new core_1.EventEmitter();
                     this._el = el.nativeElement;
                     // always mendatory, since layout sometimes changes when overflow changes
                     this._el.style.overflow = 'hidden';
                 }
                 CollapseDirective.prototype.hideElement = function () {
                     this._el.style.height = '0px';
+                    this.animationStable.emit({ collapsed: true });
                 };
                 CollapseDirective.prototype.showElement = function () {
                     this._el.style.height = 'auto';
+                    this.animationStable.emit({ collapsed: false });
                 };
                 CollapseDirective.prototype.animate = function (from, to) {
                     this._animationBuilder.css()
@@ -43,9 +46,9 @@ System.register(['angular2/core', 'angular2/src/animate/animation_builder'], fun
                         .start(this._el)
                         .onComplete(to === '0px' ? this.hideElement.bind(this) : this.showElement.bind(this));
                 };
-                CollapseDirective.prototype.toggleElement = function (collapse) {
+                CollapseDirective.prototype.toggleElement = function (toCollapse) {
                     var fullHeight = this._el.scrollHeight + 'px';
-                    if (collapse) {
+                    if (toCollapse) {
                         this.animate(fullHeight, '0px');
                     }
                     else {
@@ -53,27 +56,30 @@ System.register(['angular2/core', 'angular2/src/animate/animation_builder'], fun
                     }
                 };
                 CollapseDirective.prototype.ngOnChanges = function (changes) {
-                    var collapse = changes.collapse;
-                    console.log(collapse);
-                    if (collapse.isFirstChange()) {
+                    var collapsed = changes.collapsed;
+                    if (collapsed.isFirstChange()) {
                         // we want to simply hide/show the element based on the initial value
-                        collapse.currentValue ? this.hideElement() : this.showElement();
+                        collapsed.currentValue ? this.hideElement() : this.showElement();
                     }
-                    else if (collapse.currentValue !== collapse.previousValue) {
-                        this.toggleElement(collapse.currentValue);
+                    else if (collapsed.currentValue !== collapsed.previousValue) {
+                        this.toggleElement(collapsed.currentValue);
                     }
                 };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Boolean)
-                ], CollapseDirective.prototype, "collapse", void 0);
+                ], CollapseDirective.prototype, "collapsed", void 0);
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Number)
                 ], CollapseDirective.prototype, "collapseTime", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], CollapseDirective.prototype, "animationStable", void 0);
                 CollapseDirective = __decorate([
                     core_1.Directive({
-                        selector: '[collapse]',
+                        selector: '[collapsed]',
                     }), 
                     __metadata('design:paramtypes', [animation_builder_1.AnimationBuilder, core_1.ElementRef])
                 ], CollapseDirective);

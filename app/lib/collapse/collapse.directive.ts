@@ -1,14 +1,15 @@
-import {Directive, ElementRef, Input, OnChanges, SimpleChange} from 'angular2/core';
+import {Directive, ElementRef, Input, Output, EventEmitter, OnChanges, SimpleChange} from 'angular2/core';
 import {AnimationBuilder} from 'angular2/src/animate/animation_builder';
 
 const DEFAULT_COLLAPSE_TIME = 400;
 
 @Directive({
-  selector: '[collapse]',
+  selector: '[collapsed]',
 })
 export class CollapseDirective implements OnChanges {
-    @Input() collapse:boolean;
+    @Input() collapsed:boolean;
     @Input() collapseTime:number;
+    @Output() animationStable = new EventEmitter();
     
     private _el;
     
@@ -21,9 +22,11 @@ export class CollapseDirective implements OnChanges {
     
     hideElement() {
         this._el.style.height = '0px';
+        this.animationStable.emit({collapsed: true});
     }
     showElement() {
         this._el.style.height = 'auto';
+        this.animationStable.emit({collapsed: false});
     }
     
     animate(from:string, to:string) {
@@ -35,9 +38,9 @@ export class CollapseDirective implements OnChanges {
             .onComplete(to === '0px' ? this.hideElement.bind(this) : this.showElement.bind(this));
     }
     
-    toggleElement(collapse:boolean) {
+    toggleElement(toCollapse:boolean) {
         var fullHeight = this._el.scrollHeight + 'px';
-        if (collapse) {
+        if (toCollapse) {
             this.animate(fullHeight, '0px');
         } else {
             this.animate('0px', fullHeight);
@@ -45,13 +48,12 @@ export class CollapseDirective implements OnChanges {
     }
     
     ngOnChanges(changes:any) {
-        let collapse:SimpleChange = changes.collapse;
-        console.log(collapse);
-        if (collapse.isFirstChange()) {
+        let collapsed:SimpleChange = changes.collapsed;
+        if (collapsed.isFirstChange()) {
             // we want to simply hide/show the element based on the initial value
-            collapse.currentValue ? this.hideElement() : this.showElement();
-        } else if (collapse.currentValue !== collapse.previousValue) {
-            this.toggleElement(collapse.currentValue);
+            collapsed.currentValue ? this.hideElement() : this.showElement();
+        } else if (collapsed.currentValue !== collapsed.previousValue) {
+            this.toggleElement(collapsed.currentValue);
         }
     }
 }

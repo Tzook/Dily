@@ -8,7 +8,6 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
         <input #name (keyup.enter)="emitConnect(name.value)" type="text" placeholder="Name">
         <button (click)="emitConnect(name.value)">Connect</button>
         <button [routerLink]="['Lobby']">Back to lobby</button>
-        <p [hidden]="!error">{{error}}</p>
     `,
     providers: [],
     directives: [ROUTER_DIRECTIVES],
@@ -16,7 +15,6 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 })
 export class EnterNameComponent {
     @Output() connect = new EventEmitter();
-    @Input() error:string;
     
     emitConnect(name:string) {
         this.connect.emit(name);

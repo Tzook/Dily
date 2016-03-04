@@ -32,14 +32,10 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], EnterNameComponent.prototype, "connect", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', String)
-                ], EnterNameComponent.prototype, "error", void 0);
                 EnterNameComponent = __decorate([
                     core_1.Component({
                         selector: 'enter-name',
-                        template: "\n        <h2>Enter your name</h2>\n        <input #name (keyup.enter)=\"emitConnect(name.value)\" type=\"text\" placeholder=\"Name\">\n        <button (click)=\"emitConnect(name.value)\">Connect</button>\n        <button [routerLink]=\"['Lobby']\">Back to lobby</button>\n        <p [hidden]=\"!error\">{{error}}</p>\n    ",
+                        template: "\n        <h2>Enter your name</h2>\n        <input #name (keyup.enter)=\"emitConnect(name.value)\" type=\"text\" placeholder=\"Name\">\n        <button (click)=\"emitConnect(name.value)\">Connect</button>\n        <button [routerLink]=\"['Lobby']\">Back to lobby</button>\n    ",
                         providers: [],
                         directives: [router_1.ROUTER_DIRECTIVES],
                     }), 

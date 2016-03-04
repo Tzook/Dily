@@ -74,7 +74,9 @@ System.register(['angular2/core', '../logger/logger'], function(exports_1, conte
                     });
                 };
                 SocketService.prototype.disconnect = function () {
-                    this._logger.log("Disconnecting socket. TODO!");
+                    this._logger.log("Disconnecting socket.");
+                    this._socket.disconnect();
+                    this._isConnected = false;
                 };
                 SocketService = __decorate([
                     core_1.Injectable(), 
