@@ -10,9 +10,10 @@ import {Router} from 'angular2/router';
         <input #room type="number" placeholder="Room" max="100000" min="1" required>
         <button (click)="joinRoom(room.value)">Join room</button>
     `,
+    directives: [],
     providers: [],
 })
-export class LobbyComponent { 
+export class LobbyComponent {
     constructor(private _router:Router) {}
     
     joinRoom(room:string) {

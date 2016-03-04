@@ -49,6 +49,7 @@ export class DieComponent implements OnChanges {
             this.beginRoll();
         }
     }
+    
     private beginRoll() {
         this._rolling = false;
         setTimeout(() => {
