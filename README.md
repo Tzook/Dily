@@ -6,4 +6,4 @@ A game app for [Liar's Dice](http://www.wikihow.com/Play-Liar's-Dice), using Ang
 
 ## Team
 
-Being developed by [Tzook Shaked](tzook10@gmail.com) & [Noam Elboim](noam@mail.com).
+Being developed by [Tzook Shaked](mailto:tzook10@gmail.com) & [Noam Elboim](mailto:noam@mail.com).
