@@ -65,6 +65,18 @@ button[disabled] {
     opacity: .5;
 }
 
+.lobby-die {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.lobby-die die {
+    cursor: pointer;
+    position: relative;
+    left: calc(50% - 25px);
+}
+
 .players {
     text-align: left;
 }
