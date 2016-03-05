@@ -27,7 +27,7 @@ System.register(['angular2/core', 'angular2/router', '../dice/die.component'], f
             LobbyComponent = (function () {
                 function LobbyComponent(_router) {
                     this._router = _router;
-                    this._result = 3;
+                    this._result = 6;
                     this._roll = 0;
                 }
                 LobbyComponent.prototype.joinRoom = function (room) {
