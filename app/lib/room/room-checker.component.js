@@ -47,14 +47,14 @@ System.register(['angular2/core', 'angular2/router', '../messages/message.servic
                         .catch(function (error) { return _this._messageService.message = { text: error, type: 'error' }; });
                 };
                 RoomCheckerComponent.prototype.ngOnDestroy = function () {
-                    this._socketService.disconnect();
+                    // TODO
+                    // this._socketService.disconnect();
                 };
                 RoomCheckerComponent = __decorate([
                     core_1.Component({
                         selector: 'room-checker',
                         template: "\n        <div [ngSwitch]=\"_socketService.isConnected\">\n            <template ngSwitchDefault>\n                <enter-name (connect)=\"connect($event)\"></enter-name>\n            </template>\n            <template [ngSwitchWhen]=\"true\">\n                <room [myId]=\"_socketService.myId\"></room>\n            </template>\n        </div>\n    ",
                         directives: [enter_name_component_1.EnterNameComponent, room_component_1.RoomComponent],
-                        providers: [],
                     }), 
                     __metadata('design:paramtypes', [socket_service_1.SocketService, message_service_1.MessageService, router_1.Router, router_1.RouteParams])
                 ], RoomCheckerComponent);

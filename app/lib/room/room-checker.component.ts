@@ -18,7 +18,6 @@ import {RoomComponent} from './room.component';
         </div>
     `,
     directives: [EnterNameComponent, RoomComponent],
-    providers: [],
 })
 export class RoomCheckerComponent implements OnDestroy {
     constructor(private _socketService:SocketService,
