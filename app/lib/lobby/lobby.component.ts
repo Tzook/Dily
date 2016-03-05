@@ -21,7 +21,7 @@ export class LobbyComponent {
     private _result:number;
     private _roll:number;
     constructor(private _router:Router) {
-        this._result = 3;
+        this._result = 6;
         this._roll = 0;
     }
     
