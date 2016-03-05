@@ -25,7 +25,7 @@ System.register(['angular2/core', '../collapse/collapse.directive'], function(ex
                 function MessageComponent() {
                     this.messageGone = new core_1.EventEmitter();
                 }
-                MessageComponent.prototype.emitIfCollapsed = function (collapsed) {
+                MessageComponent.prototype._emitIfCollapsed = function (collapsed) {
                     if (collapsed) {
                         this.messageGone.emit({});
                     }
@@ -40,7 +40,7 @@ System.register(['angular2/core', '../collapse/collapse.directive'], function(ex
                 ], MessageComponent.prototype, "text", void 0);
                 __decorate([
                     core_1.Input(), 
-                    __metadata('design:type', Object)
+                    __metadata('design:type', String)
                 ], MessageComponent.prototype, "type", void 0);
                 __decorate([
                     core_1.Output(), 
@@ -49,7 +49,7 @@ System.register(['angular2/core', '../collapse/collapse.directive'], function(ex
                 MessageComponent = __decorate([
                     core_1.Component({
                         selector: 'message',
-                        template: "\n        <div [collapsed]=\"!visible\" (animationStable)=\"emitIfCollapsed($event.collapsed)\">{{text}}</div>\n    ",
+                        template: "\n        <div [collapsed]=\"!visible\" (animationStable)=\"_emitIfCollapsed($event.collapsed)\">{{text}}</div>\n    ",
                         directives: [collapse_directive_1.CollapseDirective],
                     }), 
                     __metadata('design:paramtypes', [])

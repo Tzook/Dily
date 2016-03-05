@@ -24,18 +24,18 @@ System.register(['angular2/core', './player.component'], function(exports_1, con
             PlayersComponent = (function () {
                 function PlayersComponent() {
                 }
-                PlayersComponent.prototype.getPlayers = function () {
+                PlayersComponent.prototype._getPlayers = function () {
                     var _this = this;
-                    return Object.keys(this.list).map(function (item) { return _this.list[item]; });
+                    return Object.keys(this.players).map(function (id) { return _this.players[id]; });
                 };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Object)
-                ], PlayersComponent.prototype, "list", void 0);
+                ], PlayersComponent.prototype, "players", void 0);
                 PlayersComponent = __decorate([
                     core_1.Component({
                         selector: 'players',
-                        template: "\n        <ul class=\"players\">\n            <player *ngFor=\"#player of getPlayers()\" [name]=\"player.name\" [result]=\"player.result\" [turn]=\"player.turn\" [count]=\"player.count\"></player>\n        </ul>\n    ",
+                        template: "\n        <ul class=\"players\">\n            <player *ngFor=\"#player of _getPlayers()\" [name]=\"player.name\" [result]=\"player.result\" [turn]=\"player.turn\" [count]=\"player.count\"></player>\n        </ul>\n    ",
                         directives: [player_component_1.PlayerComponent],
                     }), 
                     __metadata('design:paramtypes', [])

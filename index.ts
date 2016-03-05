@@ -1,5 +1,4 @@
 /// <reference path="node_modules/angular2/typings/browser.d.ts" />
-console.log('bootstrapping');
 
 import {AppComponent} from './app/lib/app.component';
 import {Logger} from './app/lib/logger/logger';

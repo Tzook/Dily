@@ -30,7 +30,6 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         selector: 'face',
                         template: "\n        <span class=\"dot\" *ngFor=\"#location of locations\" [ngClass]=\"location\"></span>\n    ",
                         directives: [],
-                        providers: [],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], FaceComponent);

@@ -15,7 +15,16 @@ import {RoomCheckerComponent} from './room/room-checker.component';
     providers: [MessageService],
 })
 @RouteConfig([
-    {path: '/lobby', name: 'Lobby', component: LobbyComponent, useAsDefault: true},
-    {path: '/room/:room', name: 'Room',  component: RoomCheckerComponent},
+    {
+        useAsDefault: true,
+        path: '/lobby', 
+        name: 'Lobby', 
+        component: LobbyComponent, 
+    },
+    {
+        path: '/room/:room', 
+        name: 'Room',
+        component: RoomCheckerComponent
+    },
 ])
 export class AppComponent {}

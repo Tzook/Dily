@@ -1,13 +1,14 @@
 import {Injectable} from 'angular2/core';
 import {Logger} from '../logger/logger';
+import {Message} from './message.component';
 
 const MAX_MESSAGES_STACK = 3;
 
 @Injectable()
 export class MessageService {
-    private _functionHandler:Function;
-    private _hasMessage:boolean;
-    private _pendingMessages;
+    private _functionHandler: Function;
+    private _pendingMessages: Message[];
+    private _hasMessage: boolean;
 
     constructor(private _logger: Logger) {
         this._functionHandler = function() {};
@@ -15,11 +16,11 @@ export class MessageService {
         this._pendingMessages = [];
     }
     
-    set functionHandler(fn:Function) {
+    set functionHandler(fn: Function) {
         this._functionHandler = fn;
     }
     
-    set message (message) {
+    set message (message: Message) {
         this._logger.log(`Setting message`, message);
         this._functionHandler(message);
         if (!this._hasMessage) {
@@ -37,7 +38,7 @@ export class MessageService {
         }
     }
     
-    showNextPendingMessage() {
+    public showNextPendingMessage(): void {
         if (this._pendingMessages.length > 0) {
             this._logger.log(`Handling next message in queue. Messages left: ${this._pendingMessages.length - 1}`);
             this._functionHandler(this._pendingMessages.shift());

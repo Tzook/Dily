@@ -10,7 +10,7 @@ import {RoomComponent} from './room.component';
     template: `
         <div [ngSwitch]="_socketService.isConnected">
             <template ngSwitchDefault>
-                <enter-name (connect)="connect($event)"></enter-name>
+                <enter-name (connect)="_connect($event)"></enter-name>
             </template>
             <template [ngSwitchWhen]="true">
                 <room [myId]="_socketService.myId"></room>
@@ -20,12 +20,12 @@ import {RoomComponent} from './room.component';
     directives: [EnterNameComponent, RoomComponent],
 })
 export class RoomCheckerComponent implements OnDestroy {
-    constructor(private _socketService:SocketService,
-                private _messageService:MessageService,
-                private _router:Router,
-                private _routeParams:RouteParams) {}
+    constructor(private _socketService: SocketService,
+                private _messageService: MessageService,
+                private _router: Router,
+                private _routeParams: RouteParams) {}
     
-    connect(value:string) {
+    private _connect(value: string) {
         this._socketService.connect(value, this._routeParams.get('room'))
             .then(room => this._router.navigate(['Room', {room}]))
             .catch(error => this._messageService.message = {text: error, type: 'error'});

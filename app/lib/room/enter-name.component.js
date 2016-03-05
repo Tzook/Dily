@@ -25,7 +25,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 function EnterNameComponent() {
                     this.connect = new core_1.EventEmitter();
                 }
-                EnterNameComponent.prototype.emitConnect = function (name) {
+                EnterNameComponent.prototype._emitConnect = function (name) {
                     this.connect.emit(name);
                 };
                 __decorate([
@@ -35,8 +35,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 EnterNameComponent = __decorate([
                     core_1.Component({
                         selector: 'enter-name',
-                        template: "\n        <h2>Enter your name</h2>\n        <input #name (keyup.enter)=\"emitConnect(name.value)\" type=\"text\" placeholder=\"Name\">\n        <button (click)=\"emitConnect(name.value)\">Connect</button>\n        <button [routerLink]=\"['Lobby']\">Back to lobby</button>\n    ",
-                        providers: [],
+                        template: "\n        <h2>Enter your name</h2>\n        <input #name (keyup.enter)=\"_emitConnect(name.value)\" type=\"text\" placeholder=\"Name\">\n        <button (click)=\"_emitConnect(name.value)\">Connect</button>\n        <button [routerLink]=\"['Lobby']\">Back to lobby</button>\n    ",
                         directives: [router_1.ROUTER_DIRECTIVES],
                     }), 
                     __metadata('design:paramtypes', [])

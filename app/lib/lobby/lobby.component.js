@@ -25,15 +25,14 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 function LobbyComponent(_router) {
                     this._router = _router;
                 }
-                LobbyComponent.prototype.joinRoom = function (room) {
+                LobbyComponent.prototype._joinRoom = function (room) {
                     this._router.navigate(['Room', { room: room }]);
                 };
                 LobbyComponent = __decorate([
                     core_1.Component({
                         selector: 'lobby',
-                        template: "\n        <h1>~Dily~</h1>\n        <button (click)=\"joinRoom(0)\">Create room</button>\n        <p>OR</p>\n        <input #room type=\"number\" placeholder=\"Room\" max=\"100000\" min=\"1\" required>\n        <button (click)=\"joinRoom(room.value)\">Join room</button>\n    ",
+                        template: "\n        <h1>~Dily~</h1>\n        <button (click)=\"_joinRoom(0)\">Create room</button>\n        <p>OR</p>\n        <input #room type=\"number\" placeholder=\"Room\" max=\"100000\" min=\"1\" required>\n        <button (click)=\"_joinRoom(room.value)\">Join room</button>\n    ",
                         directives: [],
-                        providers: [],
                     }), 
                     __metadata('design:paramtypes', [router_1.Router])
                 ], LobbyComponent);

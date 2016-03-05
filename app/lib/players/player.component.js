@@ -52,7 +52,6 @@ System.register(['angular2/core', '../dice/hand.component'], function(exports_1,
                         selector: 'player',
                         template: "\n        <li>\n            <span [class.turn]=\"turn\">{{name}}</span>\n            <hand [count]=\"count\" [result]=\"result\" [roll]=\"_roll\"></hand>\n        </li>\n    ",
                         directives: [hand_component_1.HandComponent],
-                        providers: [],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], PlayerComponent);

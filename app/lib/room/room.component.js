@@ -44,7 +44,7 @@ System.register(['angular2/core', '../players/players.component', '../bet/bet.co
                 RoomComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._eventsReceiverService.onPlayers(function (players) { return _this._players = players; });
-                    this._eventsReceiverService.onTurn(this.onTurn.bind(this));
+                    this._eventsReceiverService.onTurn(this._onTurn.bind(this));
                     this._eventsReceiverService.onStart(function () { return _this._state = "roll"; });
                     this._eventsReceiverService.onRoll(function (id, result) { return _this._players[id].result = result; });
                     this._eventsReceiverService.onResults(function (id) { return _this._state = (_this.myId === id ? "next" : ""); });
@@ -58,11 +58,11 @@ System.register(['angular2/core', '../players/players.component', '../bet/bet.co
                     this._eventsReceiverService.removeOnResults();
                     this._eventsReceiverService.removeOnLoseDie();
                 };
-                RoomComponent.prototype.handleAction = function (action, params) {
+                RoomComponent.prototype._handleAction = function (action, params) {
                     if (params === void 0) { params = undefined; }
                     this._eventsEmitterService.emitAction(action, params);
                 };
-                RoomComponent.prototype.onTurn = function (turnId, bet) {
+                RoomComponent.prototype._onTurn = function (turnId, bet) {
                     this._state = "bet";
                     this._bet = bet;
                     if (this._turnId) {
@@ -77,7 +77,7 @@ System.register(['angular2/core', '../players/players.component', '../bet/bet.co
                 RoomComponent = __decorate([
                     core_1.Component({
                         selector: 'room',
-                        template: "\n        <players [list]=\"_players\"></players>\n        <h1 [hidden]=\"myId != _turnId || _state != 'bet'\">YOUR TURN!</h1>\n        <bet [hidden]=\"_state != 'bet'\" [count]=\"_bet.count\" [result]=\"_bet.die\"></bet>\n        <actions [state]=\"_state\" [hasBet]=\"_bet.count > 0\" [myTurn]=\"myId == _turnId\" (action)=\"handleAction($event.action, $event.params)\"></actions>\n    ",
+                        template: "\n        <players [players]=\"_players\"></players>\n        <h1 [hidden]=\"myId != _turnId || _state != 'bet'\">YOUR TURN!</h1>\n        <bet [hidden]=\"_state != 'bet'\" [count]=\"_bet.count\" [die]=\"_bet.die\"></bet>\n        <actions [state]=\"_state\" [hasBet]=\"_bet.count > 0\" [myTurn]=\"myId == _turnId\" (action)=\"_handleAction($event.action, $event.params)\"></actions>\n    ",
                         directives: [players_component_1.PlayersComponent, bet_component_1.BetComponent, actions_component_1.ActionsComponent],
                         providers: [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService],
                     }), 

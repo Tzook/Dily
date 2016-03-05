@@ -40,7 +40,7 @@ System.register(['angular2/core', 'angular2/router', '../messages/message.servic
                     this._router = _router;
                     this._routeParams = _routeParams;
                 }
-                RoomCheckerComponent.prototype.connect = function (value) {
+                RoomCheckerComponent.prototype._connect = function (value) {
                     var _this = this;
                     this._socketService.connect(value, this._routeParams.get('room'))
                         .then(function (room) { return _this._router.navigate(['Room', { room: room }]); })
@@ -53,7 +53,7 @@ System.register(['angular2/core', 'angular2/router', '../messages/message.servic
                 RoomCheckerComponent = __decorate([
                     core_1.Component({
                         selector: 'room-checker',
-                        template: "\n        <div [ngSwitch]=\"_socketService.isConnected\">\n            <template ngSwitchDefault>\n                <enter-name (connect)=\"connect($event)\"></enter-name>\n            </template>\n            <template [ngSwitchWhen]=\"true\">\n                <room [myId]=\"_socketService.myId\"></room>\n            </template>\n        </div>\n    ",
+                        template: "\n        <div [ngSwitch]=\"_socketService.isConnected\">\n            <template ngSwitchDefault>\n                <enter-name (connect)=\"_connect($event)\"></enter-name>\n            </template>\n            <template [ngSwitchWhen]=\"true\">\n                <room [myId]=\"_socketService.myId\"></room>\n            </template>\n        </div>\n    ",
                         directives: [enter_name_component_1.EnterNameComponent, room_component_1.RoomComponent],
                     }), 
                     __metadata('design:paramtypes', [socket_service_1.SocketService, message_service_1.MessageService, router_1.Router, router_1.RouteParams])

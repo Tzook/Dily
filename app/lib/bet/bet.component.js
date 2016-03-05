@@ -31,13 +31,12 @@ System.register(['angular2/core', '../dice/die.component'], function(exports_1, 
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Number)
-                ], BetComponent.prototype, "result", void 0);
+                ], BetComponent.prototype, "die", void 0);
                 BetComponent = __decorate([
                     core_1.Component({
                         selector: 'bet',
-                        template: "\n        <h2>Current bet</h2>\n        <h1>{{count}}</h1>\n        <die [scale]=\"1\" [result]=\"result\"></die>\n    ",
+                        template: "\n        <h2>Current bet</h2>\n        <h1>{{count}}</h1>\n        <die [scale]=\"1\" [result]=\"die\"></die>\n    ",
                         directives: [die_component_1.DieComponent],
-                        providers: [],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], BetComponent);

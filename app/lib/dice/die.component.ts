@@ -25,17 +25,16 @@ const INITIAL_TILT = { x: 30, z: 20 };
         </div>
     `,
     directives: [FaceComponent],
-    providers: [],
 })
 export class DieComponent implements OnChanges {
-    @Input() scale:number;
-    @Input() result:number;
-    @Input() roll:number;
+    @Input() scale: number;
+    @Input() result: number;
+    @Input() roll: number;
     
-    private _faces:any[];
-    private _tilt:string;
-    private _rolling:boolean;
-    private _flipTime:string;
+    private _faces: any[];
+    private _tilt: string;
+    private _rolling: boolean;
+    private _flipTime: string;
     
     constructor() {
         this._faces = FACES;
@@ -43,15 +42,16 @@ export class DieComponent implements OnChanges {
         this._rolling = false;
     }
     
-    ngOnChanges(changes:any) {
+    ngOnChanges(changes: any) {
         let roll:SimpleChange = changes.roll;
         if (roll && roll.currentValue !== roll.previousValue && !roll.isFirstChange()) {
-            this.beginRoll();
+            this._beginRoll();
         }
     }
     
-    private beginRoll() {
+    private _beginRoll(): void {
         this._rolling = false;
+        // TODO handle this using angular 2 animation builder
         setTimeout(() => {
             // tilt
             var tiltZ = getRandomNumber(0, 360);
@@ -66,6 +66,6 @@ export class DieComponent implements OnChanges {
 }
 
 // TODO move this somewhere generic
-function getRandomNumber(start, end) {
+function getRandomNumber(start: number, end: number): number {
     return (Math.random() * (end - start + 1) + start) | 0;
 }

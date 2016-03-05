@@ -5,15 +5,15 @@ import {PlayerComponent} from './player.component';
     selector: 'players',
     template: `
         <ul class="players">
-            <player *ngFor="#player of getPlayers()" [name]="player.name" [result]="player.result" [turn]="player.turn" [count]="player.count"></player>
+            <player *ngFor="#player of _getPlayers()" [name]="player.name" [result]="player.result" [turn]="player.turn" [count]="player.count"></player>
         </ul>
     `,
     directives: [PlayerComponent],
 })
 export class PlayersComponent {
-    @Input() list:Object;
+    @Input() players: {[key: string]: PlayerComponent};
     
-    getPlayers() : Object[] {
-        return Object.keys(this.list).map(item => this.list[item]);
+    private _getPlayers() : PlayerComponent[] {
+        return Object.keys(this.players).map(id => this.players[id]);
     }
 }

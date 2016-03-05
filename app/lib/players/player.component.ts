@@ -10,22 +10,21 @@ import {HandComponent} from '../dice/hand.component';
         </li>
     `,
     directives: [HandComponent],
-    providers: [],
 })
 export class PlayerComponent implements OnChanges {
-    @Input() name:string;
-    @Input() turn:boolean;
-    @Input() result:number[];
-    @Input() count:number;
+    @Input() name: string;
+    @Input() turn: boolean;
+    @Input() result: number[];
+    @Input() count: number;
     
-    private _roll:number;
+    private _roll: number;
     
     constructor() {
         this._roll = 0;
     }
     
-    ngOnChanges(changes:any) {
-        let result:SimpleChange = changes.result;
+    ngOnChanges(changes: any) {
+        let result: SimpleChange = changes.result;
         if (result && result.currentValue !== result.previousValue && !result.isFirstChange()) {
             this._roll++;
         }

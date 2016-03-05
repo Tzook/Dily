@@ -1,3 +1,4 @@
+/// <reference path="node_modules/angular2/typings/browser.d.ts" />
 System.register(['./app/lib/app.component', './app/lib/logger/logger', './app/lib/socket/socket.service', 'angular2/platform/browser', 'angular2/router', 'angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
@@ -24,8 +25,6 @@ System.register(['./app/lib/app.component', './app/lib/logger/logger', './app/li
                 core_1 = core_1_1;
             }],
         execute: function() {
-            /// <reference path="node_modules/angular2/typings/browser.d.ts" />
-            console.log('bootstrapping');
             windowProvide = core_1.provide(Window, { useValue: window });
             browser_1.bootstrap(app_component_1.AppComponent, [router_1.ROUTER_PROVIDERS, logger_1.Logger, socket_service_1.SocketService, windowProvide]);
         }

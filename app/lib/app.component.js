@@ -44,8 +44,17 @@ System.register(['angular2/core', 'angular2/router', './messages/message-handler
                         providers: [message_service_1.MessageService],
                     }),
                     router_1.RouteConfig([
-                        { path: '/lobby', name: 'Lobby', component: lobby_component_1.LobbyComponent, useAsDefault: true },
-                        { path: '/room/:room', name: 'Room', component: room_checker_component_1.RoomCheckerComponent },
+                        {
+                            useAsDefault: true,
+                            path: '/lobby',
+                            name: 'Lobby',
+                            component: lobby_component_1.LobbyComponent,
+                        },
+                        {
+                            path: '/room/:room',
+                            name: 'Room',
+                            component: room_checker_component_1.RoomCheckerComponent
+                        },
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

@@ -29,12 +29,12 @@ System.register(['angular2/core', './message.component', './message.service'], f
                 function MessageHandlerComponent(_messageService) {
                     this._messageService = _messageService;
                     this._visible = false;
-                    this._messageService.functionHandler = this.showMessage.bind(this);
+                    this._message = {};
+                    this._messageService.functionHandler = this._showMessage.bind(this);
                 }
-                MessageHandlerComponent.prototype.showMessage = function (message) {
+                MessageHandlerComponent.prototype._showMessage = function (message) {
                     var _this = this;
-                    this._text = message.text;
-                    this._type = message.type;
+                    this._message = message;
                     setTimeout(function () {
                         _this._visible = false;
                     }, MESSAGE_TIME);
@@ -45,7 +45,7 @@ System.register(['angular2/core', './message.component', './message.service'], f
                 MessageHandlerComponent = __decorate([
                     core_1.Component({
                         selector: 'message-handler',
-                        template: "\n        <message (messageGone)=\"_messageService.showNextPendingMessage()\" [visible]=\"_visible\" [text]=\"_text\" [type]=\"_type\"></message>\n    ",
+                        template: "\n        <message (messageGone)=\"_messageService.showNextPendingMessage()\" [visible]=\"_visible\" [text]=\"_message.text\" [type]=\"_message.type\"></message>\n    ",
                         directives: [message_component_1.MessageComponent],
                     }), 
                     __metadata('design:paramtypes', [message_service_1.MessageService])

@@ -4,7 +4,7 @@ import {RouterLink} from 'angular2/router';
 @Component({
     selector: 'action-start',
     template: `
-        <button (click)="emitStart()">start</button>
+        <button (click)="_emitStart()">start</button>
         <button [routerLink]="['Lobby']">exit</button>
     `,
     directives: [RouterLink],
@@ -12,7 +12,7 @@ import {RouterLink} from 'angular2/router';
 export class ActionStartComponent {
     @Output() start = new EventEmitter();
 
-    emitStart() {
+    private _emitStart(): void {
         this.start.emit({});
     }
 }

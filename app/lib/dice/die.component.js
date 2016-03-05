@@ -43,12 +43,13 @@ System.register(['angular2/core', './face.component'], function(exports_1, conte
                 DieComponent.prototype.ngOnChanges = function (changes) {
                     var roll = changes.roll;
                     if (roll && roll.currentValue !== roll.previousValue && !roll.isFirstChange()) {
-                        this.beginRoll();
+                        this._beginRoll();
                     }
                 };
-                DieComponent.prototype.beginRoll = function () {
+                DieComponent.prototype._beginRoll = function () {
                     var _this = this;
                     this._rolling = false;
+                    // TODO handle this using angular 2 animation builder
                     setTimeout(function () {
                         // tilt
                         var tiltZ = getRandomNumber(0, 360);
@@ -76,7 +77,6 @@ System.register(['angular2/core', './face.component'], function(exports_1, conte
                         selector: 'die',
                         template: "\n        <div class=\"layer\" [style.transform]=\"'scale(' + scale + ')'\">\n            <div class=\"layer\" [style.transform]=\"_tilt\">\n                <div class=\"layer\" [class.roll]=\"_rolling\" [style.animation-duration]=\"_flipTime\">\n                    <div [class]=\"'layer result-' + (result || 0)\">\n                        <face *ngFor=\"#face of _faces\" [class]=\"face.class\" [locations]=\"face.locations\"></face>\n                    </div>\n                </div>\n            </div>\n        </div>\n    ",
                         directives: [face_component_1.FaceComponent],
-                        providers: [],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], DieComponent);

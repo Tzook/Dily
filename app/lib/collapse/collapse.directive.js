@@ -30,39 +30,39 @@ System.register(['angular2/core', 'angular2/src/animate/animation_builder'], fun
                     // always mendatory, since layout sometimes changes when overflow changes
                     this._el.style.overflow = 'hidden';
                 }
-                CollapseDirective.prototype.hideElement = function () {
+                CollapseDirective.prototype._hideElement = function () {
                     this._el.style.height = '0px';
                     this.animationStable.emit({ collapsed: true });
                 };
-                CollapseDirective.prototype.showElement = function () {
+                CollapseDirective.prototype._showElement = function () {
                     this._el.style.height = 'auto';
                     this.animationStable.emit({ collapsed: false });
                 };
-                CollapseDirective.prototype.animate = function (from, to) {
+                CollapseDirective.prototype._animate = function (from, to) {
                     this._animationBuilder.css()
                         .setDuration(this.collapseTime || DEFAULT_COLLAPSE_TIME)
                         .setFromStyles({ height: from })
                         .setToStyles({ height: to })
                         .start(this._el)
-                        .onComplete(to === '0px' ? this.hideElement.bind(this) : this.showElement.bind(this));
+                        .onComplete(to === '0px' ? this._hideElement.bind(this) : this._showElement.bind(this));
                 };
-                CollapseDirective.prototype.toggleElement = function (toCollapse) {
+                CollapseDirective.prototype._toggleElement = function (toCollapse) {
                     var fullHeight = this._el.scrollHeight + 'px';
                     if (toCollapse) {
-                        this.animate(fullHeight, '0px');
+                        this._animate(fullHeight, '0px');
                     }
                     else {
-                        this.animate('0px', fullHeight);
+                        this._animate('0px', fullHeight);
                     }
                 };
                 CollapseDirective.prototype.ngOnChanges = function (changes) {
                     var collapsed = changes.collapsed;
                     if (collapsed.isFirstChange()) {
                         // we want to simply hide/show the element based on the initial value
-                        collapsed.currentValue ? this.hideElement() : this.showElement();
+                        collapsed.currentValue ? this._hideElement() : this._showElement();
                     }
                     else if (collapsed.currentValue !== collapsed.previousValue) {
-                        this.toggleElement(collapsed.currentValue);
+                        this._toggleElement(collapsed.currentValue);
                     }
                 };
                 __decorate([

@@ -4,16 +4,16 @@ import {SocketService} from './socket.service';
 
 @Injectable()
 export class EventsReceiverService {
-    private _socket;
-    private _events:Set<any>;
+    private _socket: any;
+    private _events: Set<string>;
     
-    constructor(private _logger:Logger,
-                _socketService:SocketService) {
+    constructor(private _logger: Logger,
+                _socketService: SocketService) {
         this._socket = _socketService.socket;
-        this._events = new Set();
+        this._events = new Set<string>();
     }
     
-    private onEvent(event:string, fn:Function, ...args) {
+    private _onEvent(event: string, fn: Function, ...args: string[]): void {
         this._logger.log(`Adding ${event} listener, with ${JSON.stringify(args)} arguments.`);
         if (this._events.has(event)) {
             this._logger.log(`Already registered the event ${event}!`);
@@ -22,13 +22,12 @@ export class EventsReceiverService {
         
         this._socket.on(event, data => {
             this._logger.log(`Got ${event} data: ${JSON.stringify(data)}.`);
-            let dataValues = this.grabDataFields(args, data); 
-            
+            let dataValues = this._grabDataFields(args, data); 
             fn.apply(fn, dataValues);
         });
     }
     
-    private removeOnEvent(event:string) {
+    private _removeOnEvent(event: string): void {
         this._logger.log(`Removing ${event} listener.`);
         if (!this._events.has(event)) {
             this._logger.log(`Event ${event} was not registered!`);
@@ -38,7 +37,7 @@ export class EventsReceiverService {
         this._socket.removeListener(event);
     }
     
-    private grabDataFields(args:string[], data:Object) : string[] {
+    private _grabDataFields(args: string[], data: Object) : string[] {
         let dataValues = [];
         for (let i in args) {
             let argValue = args[i];
@@ -47,45 +46,45 @@ export class EventsReceiverService {
         return dataValues;
     }
     
-    onPlayers(fn:Function) {
-        this.onEvent('users', fn, 'users');
+    public onPlayers(fn: Function): void {
+        this._onEvent('users', fn, 'users');
     }
-    removeOnPlayers() {
-        this.removeOnEvent('users');
-    }
-    
-    onTurn(fn:Function) {
-        this.onEvent('turn', fn, 'id', 'bet');
-    }
-    removeOnTurn() {
-        this.removeOnEvent('turn');
+    public removeOnPlayers(): void {
+        this._removeOnEvent('users');
     }
     
-    onStart(fn:Function) {
-        this.onEvent('start', fn);
+    public onTurn(fn:Function): void {
+        this._onEvent('turn', fn, 'id', 'bet');
     }
-    removeOnStart() {
-        this.removeOnEvent('start');
-    }
-    
-    onRoll(fn:Function) {
-        this.onEvent('roll', fn, 'id', 'result');
-    }
-    removeOnRoll() {
-        this.removeOnEvent('roll');
+    public removeOnTurn(): void {
+        this._removeOnEvent('turn');
     }
     
-    onResults(fn:Function) {
-        this.onEvent('results', fn, 'id');
+    public onStart(fn:Function): void {
+        this._onEvent('start', fn);
     }
-    removeOnResults() {
-        this.removeOnEvent('results');
+    public removeOnStart(): void {
+        this._removeOnEvent('start');
     }
     
-    onLoseDie(fn:Function) {
-        this.onEvent('lose-die', fn, 'id');
+    public onRoll(fn:Function): void {
+        this._onEvent('roll', fn, 'id', 'result');
     }
-    removeOnLoseDie() {
-        this.removeOnEvent('lose-die');
+    public removeOnRoll(): void {
+        this._removeOnEvent('roll');
+    }
+    
+    public onResults(fn:Function): void {
+        this._onEvent('results', fn, 'id');
+    }
+    public removeOnResults(): void {
+        this._removeOnEvent('results');
+    }
+    
+    public onLoseDie(fn:Function): void {
+        this._onEvent('lose-die', fn, 'id');
+    }
+    public removeOnLoseDie(): void {
+        this._removeOnEvent('lose-die');
     }
 }

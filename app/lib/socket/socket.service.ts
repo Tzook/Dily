@@ -4,24 +4,24 @@ import {Logger} from '../logger/logger';
 @Injectable()
 export class SocketService {
     private _isConnected:boolean;
-    private _socket;
+    private _socket: any;
     
     constructor(private _window: Window,
-                private _logger:Logger) {}
+                private _logger: Logger) {}
     
-    get isConnected() : boolean {
+    get isConnected(): boolean {
         return this._isConnected;
     }
     
-    get socket() {
+    get socket(): any {
         return this._socket;
     }
     
-    get myId() : string {
+    get myId(): string {
         return "/#" + this._socket.id;
     }
     
-    connect(name:string, room:string) {
+    public connect(name: string, room: string): Promise<string> {
         this._logger.log(`Trying to connect to socket with name ${name} and room ${room}.`);
         // TODO somehow solve the io issue - it is not known to typescript, when using window.io
         this._socket = this._window['io'](this._window.location.host, {query: "room=" + room + "&name=" + name});
@@ -49,7 +49,7 @@ export class SocketService {
         });
     }
     
-    disconnect() {
+    public disconnect(): void {
         this._logger.log(`Disconnecting socket.`);
         this._socket.disconnect();
         this._isConnected = false;        

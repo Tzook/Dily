@@ -30,7 +30,7 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                     this._socket = _socketService.socket;
                     this._events = new Set();
                 }
-                EventsReceiverService.prototype.onEvent = function (event, fn) {
+                EventsReceiverService.prototype._onEvent = function (event, fn) {
                     var _this = this;
                     var args = [];
                     for (var _i = 2; _i < arguments.length; _i++) {
@@ -43,11 +43,11 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                     this._events.add(event);
                     this._socket.on(event, function (data) {
                         _this._logger.log("Got " + event + " data: " + JSON.stringify(data) + ".");
-                        var dataValues = _this.grabDataFields(args, data);
+                        var dataValues = _this._grabDataFields(args, data);
                         fn.apply(fn, dataValues);
                     });
                 };
-                EventsReceiverService.prototype.removeOnEvent = function (event) {
+                EventsReceiverService.prototype._removeOnEvent = function (event) {
                     this._logger.log("Removing " + event + " listener.");
                     if (!this._events.has(event)) {
                         this._logger.log("Event " + event + " was not registered!");
@@ -55,7 +55,7 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                     this._events.delete(event);
                     this._socket.removeListener(event);
                 };
-                EventsReceiverService.prototype.grabDataFields = function (args, data) {
+                EventsReceiverService.prototype._grabDataFields = function (args, data) {
                     var dataValues = [];
                     for (var i in args) {
                         var argValue = args[i];
@@ -64,40 +64,40 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                     return dataValues;
                 };
                 EventsReceiverService.prototype.onPlayers = function (fn) {
-                    this.onEvent('users', fn, 'users');
+                    this._onEvent('users', fn, 'users');
                 };
                 EventsReceiverService.prototype.removeOnPlayers = function () {
-                    this.removeOnEvent('users');
+                    this._removeOnEvent('users');
                 };
                 EventsReceiverService.prototype.onTurn = function (fn) {
-                    this.onEvent('turn', fn, 'id', 'bet');
+                    this._onEvent('turn', fn, 'id', 'bet');
                 };
                 EventsReceiverService.prototype.removeOnTurn = function () {
-                    this.removeOnEvent('turn');
+                    this._removeOnEvent('turn');
                 };
                 EventsReceiverService.prototype.onStart = function (fn) {
-                    this.onEvent('start', fn);
+                    this._onEvent('start', fn);
                 };
                 EventsReceiverService.prototype.removeOnStart = function () {
-                    this.removeOnEvent('start');
+                    this._removeOnEvent('start');
                 };
                 EventsReceiverService.prototype.onRoll = function (fn) {
-                    this.onEvent('roll', fn, 'id', 'result');
+                    this._onEvent('roll', fn, 'id', 'result');
                 };
                 EventsReceiverService.prototype.removeOnRoll = function () {
-                    this.removeOnEvent('roll');
+                    this._removeOnEvent('roll');
                 };
                 EventsReceiverService.prototype.onResults = function (fn) {
-                    this.onEvent('results', fn, 'id');
+                    this._onEvent('results', fn, 'id');
                 };
                 EventsReceiverService.prototype.removeOnResults = function () {
-                    this.removeOnEvent('results');
+                    this._removeOnEvent('results');
                 };
                 EventsReceiverService.prototype.onLoseDie = function (fn) {
-                    this.onEvent('lose-die', fn, 'id');
+                    this._onEvent('lose-die', fn, 'id');
                 };
                 EventsReceiverService.prototype.removeOnLoseDie = function () {
-                    this.removeOnEvent('lose-die');
+                    this._removeOnEvent('lose-die');
                 };
                 EventsReceiverService = __decorate([
                     core_1.Injectable(), 

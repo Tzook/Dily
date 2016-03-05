@@ -25,7 +25,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 function ActionStartComponent() {
                     this.start = new core_1.EventEmitter();
                 }
-                ActionStartComponent.prototype.emitStart = function () {
+                ActionStartComponent.prototype._emitStart = function () {
                     this.start.emit({});
                 };
                 __decorate([
@@ -35,7 +35,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                 ActionStartComponent = __decorate([
                     core_1.Component({
                         selector: 'action-start',
-                        template: "\n        <button (click)=\"emitStart()\">start</button>\n        <button [routerLink]=\"['Lobby']\">exit</button>\n    ",
+                        template: "\n        <button (click)=\"_emitStart()\">start</button>\n        <button [routerLink]=\"['Lobby']\">exit</button>\n    ",
                         directives: [router_1.RouterLink],
                     }), 
                     __metadata('design:paramtypes', [])

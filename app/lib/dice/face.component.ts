@@ -6,7 +6,6 @@ import {Component, Input} from 'angular2/core';
         <span class="dot" *ngFor="#location of locations" [ngClass]="location"></span>
     `,
     directives: [],
-    providers: [],
 })
 export class FaceComponent {
     @Input() locations:string[];
