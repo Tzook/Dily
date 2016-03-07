@@ -11,7 +11,7 @@ export class CollapseDirective implements OnChanges {
     @Input() collapseTime: number;
     @Output() animationStable = new EventEmitter();
     
-    private _el;
+    private _el: HTMLElement;
     
     constructor(private _animationBuilder: AnimationBuilder,
                 el: ElementRef) {
