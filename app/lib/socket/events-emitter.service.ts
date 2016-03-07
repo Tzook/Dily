@@ -11,7 +11,7 @@ export class EventsEmitterService {
         this._socket = _socketService.socket;
     }
     
-    public emitAction(action: string, params: any = undefined) {
+    public emitAction(action: string, params: any = undefined): void {
         this._logger.log(`Emitting action ${action} with parameters ${JSON.stringify(params)}`);
         this._socket.emit(action, params);
     }   

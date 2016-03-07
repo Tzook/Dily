@@ -31,16 +31,10 @@ export class DieComponent implements OnChanges {
     @Input() result: number;
     @Input() roll: number;
     
-    private _faces: any[];
-    private _tilt: string;
-    private _rolling: boolean;
+    private _faces: any[] = FACES;
+    private _tilt: string = `rotateX(${INITIAL_TILT.x}deg) rotateZ(${INITIAL_TILT.z}deg)`;
+    private _rolling: boolean = false;
     private _flipTime: string;
-    
-    constructor() {
-        this._faces = FACES;
-        this._tilt = `rotateX(${INITIAL_TILT.x}deg) rotateZ(${INITIAL_TILT.z}deg)`;
-        this._rolling = false;
-    }
     
     ngOnChanges(changes: any) {
         let roll:SimpleChange = changes.roll;

@@ -17,19 +17,16 @@ import {DieComponent} from '../dice/die.component';
     directives: [DieComponent],
 })
 export class LobbyComponent {
-    private _result: number;
-    private _roll: number;
+    private _result: number = 6;
+    private _roll: number = 0;
     
-    constructor(private _router: Router) {
-        this._result = 6;
-        this._roll = 0;
-    }
+    constructor(private _router: Router) {}
     
-    private _joinRoom(room: string) {
+    private _joinRoom(room: string): void {
         this._router.navigate(['Room', {room}]);
     }
     
-    private _changeResult() {
+    private _changeResult(): void {
         this._result = Math.floor(Math.random() * 6) + 1;
         this._roll++;
     }

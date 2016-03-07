@@ -5,12 +5,11 @@ import {SocketService} from './socket.service';
 @Injectable()
 export class EventsReceiverService {
     private _socket: any;
-    private _events: Set<string>;
+    private _events: Set<string> = new Set<string>();
     
     constructor(private _logger: Logger,
                 _socketService: SocketService) {
         this._socket = _socketService.socket;
-        this._events = new Set<string>();
     }
     
     private _onEvent(event: string, fn: Function, ...args: string[]): void {

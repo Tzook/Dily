@@ -8,5 +8,5 @@ import {Component, Input} from 'angular2/core';
     directives: [],
 })
 export class FaceComponent {
-    @Input() locations:string[];
+    @Input() locations: string[];
 }

@@ -25,7 +25,7 @@ export class RoomCheckerComponent implements OnDestroy {
                 private _router: Router,
                 private _routeParams: RouteParams) {}
     
-    private _connect(value: string) {
+    private _connect(value: string): void {
         this._socketService.connect(value, this._routeParams.get('room'))
             .then(room => this._router.navigate(['Room', {room}]))
             .catch(error => this._messageService.message = {text: error, type: 'error'});

@@ -3,7 +3,7 @@ import {Logger} from '../logger/logger';
 
 @Injectable()
 export class SocketService {
-    private _isConnected:boolean;
+    private _isConnected: boolean;
     private _socket: any;
     
     constructor(private _window: Window,

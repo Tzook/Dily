@@ -27,8 +27,8 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
             EventsReceiverService = (function () {
                 function EventsReceiverService(_logger, _socketService) {
                     this._logger = _logger;
-                    this._socket = _socketService.socket;
                     this._events = new Set();
+                    this._socket = _socketService.socket;
                 }
                 EventsReceiverService.prototype._onEvent = function (event, fn) {
                     var _this = this;

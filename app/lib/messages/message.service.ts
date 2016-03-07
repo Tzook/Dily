@@ -6,15 +6,11 @@ const MAX_MESSAGES_STACK = 3;
 
 @Injectable()
 export class MessageService {
-    private _functionHandler: Function;
-    private _pendingMessages: Message[];
-    private _hasMessage: boolean;
+    private _functionHandler: Function = function() {};
+    private _pendingMessages: Message[] = [];
+    private _hasMessage: boolean = false;
 
-    constructor(private _logger: Logger) {
-        this._functionHandler = function() {};
-        this._hasMessage = false;
-        this._pendingMessages = [];
-    }
+    constructor(private _logger: Logger) {}
     
     set functionHandler(fn: Function) {
         this._functionHandler = fn;

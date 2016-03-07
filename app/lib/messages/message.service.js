@@ -26,8 +26,8 @@ System.register(['angular2/core', '../logger/logger'], function(exports_1, conte
                 function MessageService(_logger) {
                     this._logger = _logger;
                     this._functionHandler = function () { };
-                    this._hasMessage = false;
                     this._pendingMessages = [];
+                    this._hasMessage = false;
                 }
                 Object.defineProperty(MessageService.prototype, "functionHandler", {
                     set: function (fn) {

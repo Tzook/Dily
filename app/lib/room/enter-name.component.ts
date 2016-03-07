@@ -15,7 +15,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 export class EnterNameComponent {
     @Output() connect = new EventEmitter();
     
-    private _emitConnect(name: string) {
+    private _emitConnect(name: string): void {
         this.connect.emit(name);
     }
 }

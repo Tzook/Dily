@@ -12,12 +12,10 @@ const MESSAGE_TIME = 3500;
     directives: [MessageComponent],
 })
 export class MessageHandlerComponent {
-    private _visible: boolean;
-    private _message: Message;
+    private _visible: boolean = false;
+    private _message: Message = {};
     
     constructor(private _messageService: MessageService) {
-        this._visible = false;
-        this._message = {};
         this._messageService.functionHandler = this._showMessage.bind(this);
     }
     

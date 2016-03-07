@@ -17,11 +17,7 @@ export class PlayerComponent implements OnChanges {
     @Input() result: number[];
     @Input() count: number;
     
-    private _roll: number;
-    
-    constructor() {
-        this._roll = 0;
-    }
+    private _roll: number = 0;
     
     ngOnChanges(changes: any) {
         let result: SimpleChange = changes.result;

@@ -20,17 +20,13 @@ import {ActionsComponent} from '../actions/actions.component';
 export class RoomComponent implements OnInit, OnDestroy {
     @Input() myId: string;
     
-    private _players: {[key: string]: PlayerComponent};
-    private _state: string;
+    private _players: {[key: string]: PlayerComponent} = {};
+    private _state: string = "start";
+    private _bet: BetComponent = {count: 0, die: 0};
     private _turnId: string;
-    private _bet: BetComponent;
     
     constructor(private _eventsReceiverService: EventsReceiverService,
-                private _eventsEmitterService: EventsEmitterService) {
-        this._players = {};
-        this._state = "start";
-        this._bet = {count: 0, die: 0};
-    }
+                private _eventsEmitterService: EventsEmitterService) {}
     
     ngOnInit() {
         this._eventsReceiverService.onPlayers(players => this._players = players);
@@ -50,7 +46,7 @@ export class RoomComponent implements OnInit, OnDestroy {
         this._eventsReceiverService.removeOnLoseDie();
     }
     
-    private _handleAction(action: string, params: Object = undefined) {
+    private _handleAction(action: string, params: Object = undefined): void {
         this._eventsEmitterService.emitAction(action, params);
     }
     
