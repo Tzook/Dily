@@ -1,5 +1,5 @@
-/// <reference path="node_modules/angular2/typings/browser.d.ts" />
-System.register(['./app/lib/app.component', './app/lib/logger/logger', './app/lib/socket/socket.service', 'angular2/platform/browser', 'angular2/router', 'angular2/core'], function(exports_1, context_1) {
+/// <reference path="../node_modules/angular2/typings/browser.d.ts" />
+System.register(['./lib/app.component', './lib/logger/logger', './lib/socket/socket.service', 'angular2/platform/browser', 'angular2/router', 'angular2/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var app_component_1, logger_1, socket_service_1, browser_1, router_1, core_1;
