@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, ViewChild } from 'angular2/core';
 import { PawnComponent } from './pawn.component';
 import { KnightComponent } from './knight.component';
 import { BishopComponent } from './bishop.component';
@@ -23,6 +23,7 @@ const PIECE_TYPES = ['pawn', 'knight', 'bishop', 'rock', 'queen', 'king'];
 export class PieceComponent {
     @Input() type: string;
     @Input() yours: boolean;
+    @Input() white: boolean;
     
     constructor() {
     }
@@ -33,7 +34,7 @@ function getPiecesTemplate(): string {
     for (let piece of PIECE_TYPES) {
         template += `
             <template ngSwitchWhen="${piece}">
-                <${piece}-piece [yours]="yours"></${piece}-piece>
+                <${piece}-piece [yours]="yours" [white]="white"></${piece}-piece>
             </template>
         `;
     }

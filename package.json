@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.17",
+    "chess.js": "^0.9.4",
     "compression": "1.6.1",
     "es6-promise": "3.1.2",
     "es6-shim": "0.35.0",

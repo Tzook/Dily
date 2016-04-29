@@ -21,13 +21,17 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             PieceBase = (function () {
                 function PieceBase() {
                 }
-                PieceBase.getTemplate = function (yoursValue, otherValue) {
-                    return "\n            <span *ngIf=\"yours\">" + yoursValue + "</span>\n            <span *ngIf=\"!yours\">" + otherValue + "</span>\n        ";
+                PieceBase.getTemplate = function (whiteValue, blackValue) {
+                    return "\n            <span>\n                <span *ngIf=\"white\">" + whiteValue + "</span>\n                <span *ngIf=\"!white\">" + blackValue + "</span>\n            </span>\n        ";
                 };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Boolean)
                 ], PieceBase.prototype, "yours", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Boolean)
+                ], PieceBase.prototype, "white", void 0);
                 return PieceBase;
             }());
             exports_1("PieceBase", PieceBase);

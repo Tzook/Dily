@@ -1,12 +1,15 @@
-import { Input } from 'angular2/core';
+import { Input, Output, EventEmitter } from 'angular2/core';
 
 export abstract class PieceBase {
     @Input() yours: boolean;
-   
-    static getTemplate(yoursValue: string, otherValue: string): string {
+    @Input() white: boolean;
+    
+    static getTemplate(whiteValue: string, blackValue: string): string {
         return `
-            <span *ngIf="yours">${yoursValue}</span>
-            <span *ngIf="!yours">${otherValue}</span>
+            <span>
+                <span *ngIf="white">${whiteValue}</span>
+                <span *ngIf="!white">${blackValue}</span>
+            </span>
         `;
-    } 
+    }
 }

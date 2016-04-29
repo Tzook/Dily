@@ -7,4 +7,5 @@ import { PieceBase } from './piece.base';
     directives: [],
 })
 export class KnightComponent extends PieceBase {
+    
 }

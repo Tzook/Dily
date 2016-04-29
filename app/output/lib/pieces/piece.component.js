@@ -16,7 +16,7 @@ System.register(['angular2/core', './pawn.component', './knight.component', './b
         var template = '<span [ngSwitch]="type" class="piece">';
         for (var _i = 0, PIECE_TYPES_1 = PIECE_TYPES; _i < PIECE_TYPES_1.length; _i++) {
             var piece = PIECE_TYPES_1[_i];
-            template += "\n            <template ngSwitchWhen=\"" + piece + "\">\n                <" + piece + "-piece [yours]=\"yours\"></" + piece + "-piece>\n            </template>\n        ";
+            template += "\n            <template ngSwitchWhen=\"" + piece + "\">\n                <" + piece + "-piece [yours]=\"yours\" [white]=\"white\"></" + piece + "-piece>\n            </template>\n        ";
         }
         template += '</span>';
         return template;
@@ -57,6 +57,10 @@ System.register(['angular2/core', './pawn.component', './knight.component', './b
                     core_1.Input(), 
                     __metadata('design:type', Boolean)
                 ], PieceComponent.prototype, "yours", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Boolean)
+                ], PieceComponent.prototype, "white", void 0);
                 PieceComponent = __decorate([
                     core_1.Component({
                         selector: 'piece',

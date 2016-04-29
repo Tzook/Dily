@@ -1,4 +1,4 @@
-System.register(['angular2/core', './tile.component', '../pieces/piece.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './board.service', './tile.component', '../pieces/piece.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,15 @@ System.register(['angular2/core', './tile.component', '../pieces/piece.component
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tile_component_1, piece_component_1;
-    var BOARD_SIZE, BoardComponent;
+    var core_1, board_service_1, tile_component_1, piece_component_1;
+    var BoardComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (board_service_1_1) {
+                board_service_1 = board_service_1_1;
             },
             function (tile_component_1_1) {
                 tile_component_1 = tile_component_1_1;
@@ -24,69 +27,24 @@ System.register(['angular2/core', './tile.component', '../pieces/piece.component
                 piece_component_1 = piece_component_1_1;
             }],
         execute: function() {
-            BOARD_SIZE = 8;
             BoardComponent = (function () {
-                function BoardComponent() {
-                    this._rows = [];
-                    for (var i = 0; i < BOARD_SIZE; i++) {
-                        this._rows[i] = [];
-                        for (var j = 0; j < BOARD_SIZE; j++) {
-                            this._rows[i][j] = {
-                                backgroundColor: this._getBackgroundColor(i, j),
-                                piece: this._getInitialPiece(i, j),
-                                yours: this._getIsYours(i),
-                            };
-                        }
-                    }
+                function BoardComponent(_boardService) {
+                    this._boardService = _boardService;
                 }
-                BoardComponent.prototype._getBackgroundColor = function (row, col) {
-                    return row % 2 === col % 2 ? 'gray' : 'white';
-                };
-                BoardComponent.prototype._getInitialPiece = function (row, col) {
-                    var piece = '';
-                    switch (row) {
-                        case 1:
-                        case 6:
-                            piece = 'pawn';
-                            break;
-                        case 0:
-                        case 7:
-                            switch (col) {
-                                case 0:
-                                case 7:
-                                    piece = 'rock';
-                                    break;
-                                case 1:
-                                case 6:
-                                    piece = 'knight';
-                                    break;
-                                case 2:
-                                case 5:
-                                    piece = 'bishop';
-                                    break;
-                                case 3:
-                                    piece = 'king';
-                                    break;
-                                case 4:
-                                    piece = 'queen';
-                                    break;
-                            }
-                    }
-                    return piece;
-                };
-                BoardComponent.prototype._getIsYours = function (row) {
-                    return row > 2;
+                BoardComponent.prototype.ngOnInit = function () {
+                    this._rows = this._boardService.getRows();
                 };
                 BoardComponent = __decorate([
                     core_1.Component({
                         selector: 'board',
-                        template: "\n        <div *ngFor=\"let row of _rows\">\n            <tile *ngFor=\"let col of row\" [backgroundColor]=\"col.backgroundColor\">\n                <piece [type]=\"col.piece\" [yours]=\"col.yours\"></piece>\n            </tile>\n        </div>\n    ",
+                        template: "\n        <div *ngFor=\"let row of _rows\" class=\"row\">\n            <tile *ngFor=\"let col of row\" [backgroundColor]=\"col.backgroundColor\" [highlighted]=\"col.highlighted\" (tileClicked)=\"_boardService.tileClicked(col)\">\n                <piece [type]=\"col.piece\" [yours]=\"col.yours\" [white]=\"col.white\"></piece>\n            </tile>\n        </div>\n    ",
                         styles: [
-                            "tile {\n            display: inline-block;\n        }"
+                            "tile {\n            display: inline-block;\n        }\n        .row {\n            display: flex;\n            justify-content: center;\n        }"
                         ],
                         directives: [tile_component_1.TileComponent, piece_component_1.PieceComponent],
+                        viewProviders: [board_service_1.BoardService],
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [board_service_1.BoardService])
                 ], BoardComponent);
                 return BoardComponent;
             }());
