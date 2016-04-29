@@ -29,8 +29,8 @@ export class BoardComponent {
             for (var j: number = 0; j < BOARD_SIZE; j++) {
                 this._rows[i][j] = {
                     backgroundColor: this._getBackgroundColor(i, j),
-                    piece: 'pawn',
-                    yours: true,
+                    piece: this._getInitialPiece(i, j),
+                    yours: this._getIsYours(i),
                 };
             }
         }
@@ -38,5 +38,37 @@ export class BoardComponent {
     
     private _getBackgroundColor(row: number, col: number): string {
         return row % 2 === col % 2 ? 'gray' : 'white';
+    }
+    
+    private _getInitialPiece(row: number, col: number): string {
+        let piece = '';
+        switch (row) {
+            case 1: case 6: 
+                piece = 'pawn';
+                break;
+            case 0: case 7:
+                switch (col) {
+                    case 0: case 7:
+                        piece = 'rock';
+                        break;
+                    case 1: case 6:
+                        piece = 'knight';
+                        break;
+                    case 2: case 5:
+                        piece = 'bishop';
+                        break;
+                    case 3:
+                        piece = 'king';
+                        break;
+                    case 4:
+                        piece = 'queen';
+                        break;
+                }
+        }
+        return piece;
+    }
+    
+    private _getIsYours(row: number): boolean {
+        return row > 2;
     }
 }

@@ -33,14 +33,49 @@ System.register(['angular2/core', './tile.component', '../pieces/piece.component
                         for (var j = 0; j < BOARD_SIZE; j++) {
                             this._rows[i][j] = {
                                 backgroundColor: this._getBackgroundColor(i, j),
-                                piece: 'pawn',
-                                yours: true,
+                                piece: this._getInitialPiece(i, j),
+                                yours: this._getIsYours(i),
                             };
                         }
                     }
                 }
                 BoardComponent.prototype._getBackgroundColor = function (row, col) {
                     return row % 2 === col % 2 ? 'gray' : 'white';
+                };
+                BoardComponent.prototype._getInitialPiece = function (row, col) {
+                    var piece = '';
+                    switch (row) {
+                        case 1:
+                        case 6:
+                            piece = 'pawn';
+                            break;
+                        case 0:
+                        case 7:
+                            switch (col) {
+                                case 0:
+                                case 7:
+                                    piece = 'rock';
+                                    break;
+                                case 1:
+                                case 6:
+                                    piece = 'knight';
+                                    break;
+                                case 2:
+                                case 5:
+                                    piece = 'bishop';
+                                    break;
+                                case 3:
+                                    piece = 'king';
+                                    break;
+                                case 4:
+                                    piece = 'queen';
+                                    break;
+                            }
+                    }
+                    return piece;
+                };
+                BoardComponent.prototype._getIsYours = function (row) {
+                    return row > 2;
                 };
                 BoardComponent = __decorate([
                     core_1.Component({
