@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './messages/message-handler.component', './messages/message.service', './lobby/lobby.component', './room/room-checker.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './board/board.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './messages/message-handler
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, message_handler_component_1, message_service_1, lobby_component_1, room_checker_component_1;
+    var core_1, router_1, board_component_1;
     var AppComponent;
     return {
         setters:[
@@ -20,17 +20,8 @@ System.register(['angular2/core', 'angular2/router', './messages/message-handler
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (message_handler_component_1_1) {
-                message_handler_component_1 = message_handler_component_1_1;
-            },
-            function (message_service_1_1) {
-                message_service_1 = message_service_1_1;
-            },
-            function (lobby_component_1_1) {
-                lobby_component_1 = lobby_component_1_1;
-            },
-            function (room_checker_component_1_1) {
-                room_checker_component_1 = room_checker_component_1_1;
+            function (board_component_1_1) {
+                board_component_1 = board_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -39,21 +30,16 @@ System.register(['angular2/core', 'angular2/router', './messages/message-handler
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <message-handler></message-handler>\n        <router-outlet></router-outlet>\n    ",
-                        directives: [router_1.ROUTER_DIRECTIVES, message_handler_component_1.MessageHandlerComponent],
-                        providers: [message_service_1.MessageService],
+                        template: "\n        <router-outlet></router-outlet>\n    ",
+                        directives: [router_1.ROUTER_DIRECTIVES, board_component_1.BoardComponent],
+                        providers: [],
                     }),
                     router_1.RouteConfig([
                         {
                             useAsDefault: true,
-                            path: '/lobby',
-                            name: 'Lobby',
-                            component: lobby_component_1.LobbyComponent,
-                        },
-                        {
-                            path: '/room/:room',
-                            name: 'Room',
-                            component: room_checker_component_1.RoomCheckerComponent
+                            path: '/board',
+                            name: 'Board',
+                            component: board_component_1.BoardComponent,
                         },
                     ]), 
                     __metadata('design:paramtypes', [])

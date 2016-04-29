@@ -80,9 +80,10 @@ System.register(['angular2/core', '../logger/logger'], function(exports_1, conte
                 };
                 SocketService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [Window, logger_1.Logger])
+                    __metadata('design:paramtypes', [Window, (typeof (_a = typeof logger_1.Logger !== 'undefined' && logger_1.Logger) === 'function' && _a) || Object])
                 ], SocketService);
                 return SocketService;
+                var _a;
             }());
             exports_1("SocketService", SocketService);
         }

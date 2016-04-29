@@ -48,9 +48,10 @@ System.register(['angular2/core', './message.component', './message.service'], f
                         template: "\n        <message (messageGone)=\"_messageService.showNextPendingMessage()\" [visible]=\"_visible\" [text]=\"_message.text\" [type]=\"_message.type\"></message>\n    ",
                         directives: [message_component_1.MessageComponent],
                     }), 
-                    __metadata('design:paramtypes', [message_service_1.MessageService])
+                    __metadata('design:paramtypes', [(typeof (_a = typeof message_service_1.MessageService !== 'undefined' && message_service_1.MessageService) === 'function' && _a) || Object])
                 ], MessageHandlerComponent);
                 return MessageHandlerComponent;
+                var _a;
             }());
             exports_1("MessageHandlerComponent", MessageHandlerComponent);
         }

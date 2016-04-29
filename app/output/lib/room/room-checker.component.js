@@ -56,9 +56,10 @@ System.register(['angular2/core', 'angular2/router', '../messages/message.servic
                         template: "\n        <div [ngSwitch]=\"_socketService.isConnected\">\n            <template ngSwitchDefault>\n                <enter-name (connect)=\"_connect($event)\"></enter-name>\n            </template>\n            <template [ngSwitchWhen]=\"true\">\n                <room [myId]=\"_socketService.myId\"></room>\n            </template>\n        </div>\n    ",
                         directives: [enter_name_component_1.EnterNameComponent, room_component_1.RoomComponent],
                     }), 
-                    __metadata('design:paramtypes', [socket_service_1.SocketService, message_service_1.MessageService, router_1.Router, router_1.RouteParams])
+                    __metadata('design:paramtypes', [(typeof (_a = typeof socket_service_1.SocketService !== 'undefined' && socket_service_1.SocketService) === 'function' && _a) || Object, (typeof (_b = typeof message_service_1.MessageService !== 'undefined' && message_service_1.MessageService) === 'function' && _b) || Object, router_1.Router, router_1.RouteParams])
                 ], RoomCheckerComponent);
                 return RoomCheckerComponent;
+                var _a, _b;
             }());
             exports_1("RoomCheckerComponent", RoomCheckerComponent);
         }
