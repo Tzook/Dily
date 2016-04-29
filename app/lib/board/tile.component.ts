@@ -4,6 +4,7 @@ import { Component, Input } from 'angular2/core';
     selector: 'tile',
     template: `
        <div class="tile" [style.background-color]="backgroundColor">
+           <ng-content select="piece"></ng-content>
        </div>
     `,
     styles: [
@@ -15,7 +16,7 @@ import { Component, Input } from 'angular2/core';
     directives: [],
 })
 export class TileComponent {
-    @Input() backgroundColor;
+    @Input() backgroundColor: string;
     
     constructor() {
         

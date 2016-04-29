@@ -1,4 +1,4 @@
-System.register(['angular2/core', './tile.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './tile.component', '../pieces/piece.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './tile.component'], function(exports_1, conte
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, tile_component_1;
+    var core_1, tile_component_1, piece_component_1;
     var BOARD_SIZE, BoardComponent;
     return {
         setters:[
@@ -19,12 +19,25 @@ System.register(['angular2/core', './tile.component'], function(exports_1, conte
             },
             function (tile_component_1_1) {
                 tile_component_1 = tile_component_1_1;
+            },
+            function (piece_component_1_1) {
+                piece_component_1 = piece_component_1_1;
             }],
         execute: function() {
             BOARD_SIZE = 8;
             BoardComponent = (function () {
                 function BoardComponent() {
-                    this._rows = new Array(BOARD_SIZE);
+                    this._rows = [];
+                    for (var i = 0; i < BOARD_SIZE; i++) {
+                        this._rows[i] = [];
+                        for (var j = 0; j < BOARD_SIZE; j++) {
+                            this._rows[i][j] = {
+                                backgroundColor: this._getBackgroundColor(i, j),
+                                piece: 'pawn',
+                                yours: true,
+                            };
+                        }
+                    }
                 }
                 BoardComponent.prototype._getBackgroundColor = function (row, col) {
                     return row % 2 === col % 2 ? 'gray' : 'white';
@@ -32,11 +45,11 @@ System.register(['angular2/core', './tile.component'], function(exports_1, conte
                 BoardComponent = __decorate([
                     core_1.Component({
                         selector: 'board',
-                        template: "\n        <div *ngFor=\"let i of _rows; let row = index\">\n            <tile *ngFor=\"let i of _rows; let col = index\" \n                [backgroundColor]=\"_getBackgroundColor(row, col)\"></tile>\n        </div>\n    ",
+                        template: "\n        <div *ngFor=\"let row of _rows\">\n            <tile *ngFor=\"let col of row\" [backgroundColor]=\"col.backgroundColor\">\n                <piece [type]=\"col.piece\" [yours]=\"col.yours\"></piece>\n            </tile>\n        </div>\n    ",
                         styles: [
                             "tile {\n            display: inline-block;\n        }"
                         ],
-                        directives: [tile_component_1.TileComponent],
+                        directives: [tile_component_1.TileComponent, piece_component_1.PieceComponent],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], BoardComponent);

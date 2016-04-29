@@ -11,35 +11,46 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var TileComponent;
+    var PIECE_TYPES, PieceComponent;
+    function getPiecesTemplate() {
+        var template = '<span [ngSwitch]="type">';
+        for (var _i = 0, PIECE_TYPES_1 = PIECE_TYPES; _i < PIECE_TYPES_1.length; _i++) {
+            var piece = PIECE_TYPES_1[_i];
+            template += "\n            <template ngSwitchWhen=\"" + piece + "\">\n                <" + piece + "-piece [yours]=\"yours\"></" + piece + "-piece>\n            </template>\n        ";
+        }
+        template += '</span>';
+        return template;
+    }
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            TileComponent = (function () {
-                function TileComponent() {
+            PIECE_TYPES = ['pawn', 'knight', 'bishop', 'rook', 'queen', 'king'];
+            PieceComponent = (function () {
+                function PieceComponent() {
                 }
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', String)
-                ], TileComponent.prototype, "backgroundColor", void 0);
-                TileComponent = __decorate([
+                ], PieceComponent.prototype, "type", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Boolean)
+                ], PieceComponent.prototype, "yours", void 0);
+                PieceComponent = __decorate([
                     core_1.Component({
-                        selector: 'tile',
-                        template: "\n       <div class=\"tile\" [style.background-color]=\"backgroundColor\">\n           <ng-content select=\"piece\"></ng-content>\n       </div>\n    ",
-                        styles: [
-                            ".tile {\n            width: 100px;\n            height: 100px;\n        }"
-                        ],
+                        selector: 'piece',
+                        template: getPiecesTemplate(),
                         directives: [],
                     }), 
                     __metadata('design:paramtypes', [])
-                ], TileComponent);
-                return TileComponent;
+                ], PieceComponent);
+                return PieceComponent;
             }());
-            exports_1("TileComponent", TileComponent);
+            exports_1("PieceComponent", PieceComponent);
         }
     }
 });
-//# sourceMappingURL=tile.component.js.map
+//# sourceMappingURL=piece.component.js.map
