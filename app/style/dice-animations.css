@@ -1,0 +1,8 @@
+.roll {
+    animation: roll cubic-bezier(0.1, 0.1, 0.2, 1.1);
+}
+@keyframes roll {
+    100% {
+        transform: rotateX(2160deg) rotateY(720deg);
+    }
+}

@@ -36,10 +36,9 @@ System.register(['angular2/core', '../logger/logger', './socket.service'], funct
                 };
                 EventsEmitterService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof logger_1.Logger !== 'undefined' && logger_1.Logger) === 'function' && _a) || Object, (typeof (_b = typeof socket_service_1.SocketService !== 'undefined' && socket_service_1.SocketService) === 'function' && _b) || Object])
+                    __metadata('design:paramtypes', [logger_1.Logger, socket_service_1.SocketService])
                 ], EventsEmitterService);
                 return EventsEmitterService;
-                var _a, _b;
             }());
             exports_1("EventsEmitterService", EventsEmitterService);
         }

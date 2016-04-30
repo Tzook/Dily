@@ -12,6 +12,8 @@
     <main><my-app>Loading...</my-app></main>
     
     <link rel="stylesheet" href="app/style/base.css">
+    <link rel="stylesheet" href="app/style/dice.css">
+    <link rel="stylesheet" href="app/style/dice-animations.css">
     
     <script src="node_modules/es6-shim/es6-shim.min.js"></script>
     <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
@@ -22,6 +24,7 @@
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
     <script src="node_modules/angular2/bundles/router.dev.js"></script>
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="node_modules/socket.io-client/socket.io.js"></script>
     <script>
         System.config({packages: {app: {format: 'register', defaultExtension: 'js'}}});
         System.import('app/output/index.js');

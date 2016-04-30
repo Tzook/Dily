@@ -70,10 +70,9 @@ System.register(['angular2/core', '../logger/logger'], function(exports_1, conte
                 };
                 MessageService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof logger_1.Logger !== 'undefined' && logger_1.Logger) === 'function' && _a) || Object])
+                    __metadata('design:paramtypes', [logger_1.Logger])
                 ], MessageService);
                 return MessageService;
-                var _a;
             }());
             exports_1("MessageService", MessageService);
         }

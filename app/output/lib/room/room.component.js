@@ -81,10 +81,9 @@ System.register(['angular2/core', '../players/players.component', '../bet/bet.co
                         directives: [players_component_1.PlayersComponent, bet_component_1.BetComponent, actions_component_1.ActionsComponent],
                         providers: [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService],
                     }), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof events_receiver_service_1.EventsReceiverService !== 'undefined' && events_receiver_service_1.EventsReceiverService) === 'function' && _a) || Object, (typeof (_b = typeof events_emitter_service_1.EventsEmitterService !== 'undefined' && events_emitter_service_1.EventsEmitterService) === 'function' && _b) || Object])
+                    __metadata('design:paramtypes', [events_receiver_service_1.EventsReceiverService, events_emitter_service_1.EventsEmitterService])
                 ], RoomComponent);
                 return RoomComponent;
-                var _a, _b;
             }());
             exports_1("RoomComponent", RoomComponent);
         }
