@@ -30,10 +30,6 @@ System.register(['angular2/core', '../pieces/piece.component'], function(exports
                 };
                 __decorate([
                     core_1.Input(), 
-                    __metadata('design:type', String)
-                ], TileComponent.prototype, "backgroundColor", void 0);
-                __decorate([
-                    core_1.Input(), 
                     __metadata('design:type', Boolean)
                 ], TileComponent.prototype, "highlighted", void 0);
                 __decorate([
@@ -47,9 +43,9 @@ System.register(['angular2/core', '../pieces/piece.component'], function(exports
                 TileComponent = __decorate([
                     core_1.Component({
                         selector: 'tile',
-                        template: "\n       <div class=\"tile\" [style.background-color]=\"backgroundColor\" [ngClass]=\"{highlighted: highlighted}\" (click)=\"emitClick()\">\n           <ng-content select=\"piece\"></ng-content>\n       </div>\n    ",
+                        template: "\n       <div class=\"tile\" [ngClass]=\"{highlighted: highlighted}\" (click)=\"emitClick()\">\n           <ng-content select=\"piece\"></ng-content>\n       </div>\n    ",
                         styles: [
-                            ".tile {\n            width: 100px;\n            height: 100px;\n        }\n        .highlighted {\n            border: 2px solid;\n            cursor: pointer;\n        }"
+                            ".tile {\n            width: 100px;\n            height: 100px;\n        }\n        .highlighted {\n            cursor: pointer;\n            background-color: rgba(129, 212, 250, 0.5);\n        }"
                         ],
                         directives: [],
                     }), 

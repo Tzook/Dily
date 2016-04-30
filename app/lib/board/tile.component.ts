@@ -4,7 +4,7 @@ import { PieceComponent } from '../pieces/piece.component';
 @Component({
     selector: 'tile',
     template: `
-       <div class="tile" [style.background-color]="backgroundColor" [ngClass]="{highlighted: highlighted}" (click)="emitClick()">
+       <div class="tile" [ngClass]="{highlighted: highlighted}" (click)="emitClick()">
            <ng-content select="piece"></ng-content>
        </div>
     `,
@@ -14,14 +14,13 @@ import { PieceComponent } from '../pieces/piece.component';
             height: 100px;
         }
         .highlighted {
-            border: 2px solid;
             cursor: pointer;
+            background-color: rgba(129, 212, 250, 0.5);
         }`
     ],
     directives: [],
 })
 export class TileComponent {
-    @Input() backgroundColor: string;
     @Input() highlighted: boolean;
     @Output() tileClicked = new EventEmitter();
     @ContentChild(PieceComponent) piece: PieceComponent;
