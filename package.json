@@ -1,6 +1,6 @@
 {
-  "name": "bosschess",
-  "version": "0.0.1",
+  "name": "Dily",
+  "version": "0.0.2",
   "description": "Liars Dice",
   "scripts": {
     "start": "npm run tsc:w",
