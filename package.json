@@ -10,11 +10,15 @@
   },
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "angular2": "2.0.0-beta.15",
 =======
     "angular2": "2.0.0-beta.17",
     "chess.js": "0.9.4",
 >>>>>>> 8bb380386379fb93c909e003a49e99d00e655a5a
+=======
+    "angular2": "2.0.0-beta.15",
+>>>>>>> parent of 2721bc7... Init
     "compression": "1.6.1",
     "es6-promise": "3.1.2",
     "es6-shim": "0.35.0",
